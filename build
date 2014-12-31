@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#
+# Assumes that "fetch" has already been run to acquire the
+# Shibboleth and Jetty distributions.
+#
+
+docker pull dockerfile/java:oracle-java8
+
+docker build -t shibboleth-idp:3.0.0 .
