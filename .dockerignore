@@ -1,0 +1,6 @@
+# Files to be ignored by Docker
+
+.git
+fetched/*.gz
+fetched/shibboleth-dist
+jetty_logs/
