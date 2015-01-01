@@ -37,7 +37,13 @@ RUN javac Test.java && java Test && rm Test.class
 
 ADD fetched/jetty          ${JETTY_HOME}
 
-VOLUME ["${IDP_HOME}", "${JETTY_HOME}/logs", "${JETTY_BASE}/logs"]
+EXPOSE 443 8443 80
+
+VOLUME ["${IDP_HOME}"]
 
 WORKDIR ${JETTY_BASE}
-CMD ["java", "-jar", "/opt/jetty/start.jar"]
+CMD ["java",\
+    "-Didp.home=/opt/shibboleth-idp", \
+    "-Djetty.base=/opt/shibboleth-idp/jetty-base",\
+    "-Djetty.logs=/opt/shibboleth-idp/jetty-base/logs",\
+    "-jar", "/opt/jetty/start.jar"]

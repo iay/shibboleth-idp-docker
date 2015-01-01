@@ -3,4 +3,5 @@
 .git
 fetched/*.gz
 fetched/shibboleth-dist
-jetty_logs/
+shibboleth-idp/
+shibboleth-idp-v2/
