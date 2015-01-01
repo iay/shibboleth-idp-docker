@@ -56,6 +56,10 @@ basic installation in that directory.
 If `shibboleth-idp` already exists, `./install` will act to upgrade it to the latest distribution. This should
 be idempotent; you should be able to just run `./install` at any time without changing the results.
 
+Note that because you're running `./install` *outside* the container, you need to have Java set up there as
+well as inside, and referenced by the `JAVA_HOME` environmental variable. This is not ideal,
+and at some point I may move to performing this operation inside a second container spun up for the purpose.
+
 ## Building the Image
 
 Execute the `./build` script to fetch the latest base image and build a new container image. This new image will be
