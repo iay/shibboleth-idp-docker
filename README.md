@@ -92,7 +92,7 @@ container; it will be automatically removed when you do so.
 
 All state, such as logs, will appear at appropriate locations in the `shibboleth-idp` directory tree.
 
-## OpenSSL Tips
+## OpenSSL Tips
 
 You will often find that you have keys and certificates in a format other than the one you'd like. Here are
 some recipes I've found useful in this work.
