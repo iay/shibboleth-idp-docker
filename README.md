@@ -79,6 +79,21 @@ container; it will be automatically removed when you do so.
 
 All state, such as logs, will appear at appropriate locations in the `shibboleth-idp` directory tree.
 
+## OpenSSL Tips
+
+You will often find that you have keys and certificates in a format other than the one you'd like. Here are
+some recipes I've found useful in this work.
+
+### Self-signed Certificate and Key to PKCS12
+
+If you have a pair of PEM files (normally a self-signed certificate and the corresponding private key) and
+need them in PKCS12 form for use with Jetty, you can try something like this:
+
+    $ openssl pkcs12 -export -out X.p12 -inkey X.key -in X.crt
+
+You'll be prompted for the output password, and the input password if one is required.
+
+
 ## Copyright and License
 
 The entire package is Copyright (C) 2014, Ian A. Young.
