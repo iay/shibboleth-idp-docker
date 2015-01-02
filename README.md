@@ -49,16 +49,29 @@ The distributions are pulled into `fetched/shibboleth-dist` and `fetched/jetty`.
 
 ## Shibboleth "Install"
 
-Executing the `./install` script will run the Shibboleth install process. If you do not have a `shibboleth-idp`
-directory, this will act like a first-time install and prompt you for critical parameters, resulting in a
+Before attempting the next step, you should edit the `install` script to change the critical
+parameters at the top:
+
+* `JAVA_HOME`: because you're going to be running `./install` *outside* the container, you need to have
+Java set up there as well as inside, and the location of your JRE should be referenced by the `JAVA_HOME`
+variable. This is not ideal, and at some point I may move to performing this operation inside a second
+container spun up for the purpose.
+* `UFPASS` and `SEALERPASS` are passwords to use if the user-facing TLS credential or data sealer keystores,
+respectively, need to be generated. It's arguable whether changing the default `X-changethis` values
+really adds any security given that the values are just put in the clear in property files anyway.
+* `SCOPE` should be your organizational scope.
+* `HOST` is built from `SCOPE` by prepending `idp2.`, which probably won't suit you.
+* `ENTITYID` is built from `HOST`. The default here is the same as the interactive install would suggest.
+
+Executing the `./install` script will now run the Shibboleth install process. If you do not have a `shibboleth-idp`
+directory, this will act like a first-time install using the parameters you set before, resulting in a
 basic installation in that directory.
 
 If `shibboleth-idp` already exists, `./install` will act to upgrade it to the latest distribution. This should
-be idempotent; you should be able to just run `./install` at any time without changing the results.
+be idempotent; you should be able to just run `./install` at any time without changing the results. In this
+case, the variables set at the top of the `install` script won't have any effect as the appropriate values
+are already frozen into the configuration.
 
-Note that because you're running `./install` *outside* the container, you need to have Java set up there as
-well as inside, and referenced by the `JAVA_HOME` environmental variable. This is not ideal,
-and at some point I may move to performing this operation inside a second container spun up for the purpose.
 
 ## Building the Image
 
