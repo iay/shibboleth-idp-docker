@@ -64,7 +64,7 @@ and at some point I may move to performing this operation inside a second contai
 
 Execute the `./build` script to fetch the latest base image and build a new container image. This new image will be
 tagged as `shibboleth-idp` and incorporate the Jetty distribution fetched earlier. It will *not* include
-the contents of `shibboleth-idp`; instead, they will be mounted into the container at '/opt/shibboleth-idp' when
+the contents of `shibboleth-idp`; instead, they will be mounted into the container at `/opt/shibboleth-idp` when
 a container is run from the image.
 
 One important result of this approach is that the container image does not incorporate any secrets that are
