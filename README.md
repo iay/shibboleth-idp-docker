@@ -106,6 +106,16 @@ need them in PKCS12 form for use with Jetty, you can try something like this:
 
 You'll be prompted for the output password, and the input password if one is required.
 
+### Commercial Certificate and Key to PKCS12
+
+If you have a certificate from a commercial CA, it will normally come with a bundle of intermediates
+which need to be presented by the server in addition to the end entity certificate. If you need to
+convert a private key, certificate and bundle to PKCS12 form for use with Jetty, try this:
+
+    $ openssl pkcs12 -export -out X.p12 -inkey X.key -in X.crt -certfile chain.pem
+
+Again, you'll be prompted for any relevant passwords.
+
 
 ## Copyright and License
 
