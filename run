@@ -8,7 +8,7 @@
 # IP address of the interface to bind to
 IPADDR=192.168.117.26
 
-docker run -t --rm \
+docker run -d \
     --name=shibboleth-idp --hostname="shibboleth-idp" \
     -v `pwd`/shibboleth-idp:/opt/shibboleth-idp \
     -p $IPADDR:443:443 \
