@@ -1,0 +1,14 @@
+# systemd script for the shibboleth-idp docker container
+
+[Unit]
+Description=shibboleth-idp container
+Author=Ian Young <ian@iay.org.uk>
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a shibboleth-idp
+ExecStop=/usr/bin/docker stop -t 2 shibboleth-idp
+
+[Install]
+WantedBy=local.target

@@ -1,15 +1,14 @@
 #!/bin/bash
 
 #
-# Run the IdP container in a production mode in a container
-# with a specific name.
+# Run the IdP container in a test mode in a randomly named
+# container which terminates and is removed on Ctrl+C.
 #
 
 # IP address of the interface to bind to
 IPADDR=192.168.117.26
 
-docker run -t --rm \
-    --name=shibboleth-idp --hostname="shibboleth-idp" \
+docker run -i -t --rm \
     -v `pwd`/shibboleth-idp:/opt/shibboleth-idp \
     -p $IPADDR:443:443 \
     -p $IPADDR:8443:8443 \

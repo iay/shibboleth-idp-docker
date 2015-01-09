@@ -86,11 +86,48 @@ contain much of the IdP, just a tailored environment for it.
 
 ## Executing the Container
 
-Start a container from the image using the `./run` script. At the moment, this is set up to be an interactive
+Start a randomly named container from the image using the `./test` script. This is set up to be an interactive
 container; you will see a couple of lines of logging and then it will appear to pause. Use ^C to stop the
 container; it will be automatically removed when you do so.
 
 All state, such as logs, will appear at appropriate locations in the `shibboleth-idp` directory tree.
+
+## Other Lifecycle Scripts
+
+Also included are:
+
+* `./run` is a more conventional script to start a container called `shibboleth-idp` from the image
+and run it in the background.
+* `./stop` stops the `shibboleth-idp` container.
+* `./terminate` stops the `shibboleth-idp` container and removes the container. This is useful if
+you want to build and run another container version.
+* `./cleanup` can be used at any time to remove orphaned
+containers and images, which Docker tends to create in abundance during
+development. Use `./cleanup -n` to "dry run" and see what it would remove.
+Docker has got a fair bit better at doing this itself over time, but you may still want
+to run this once in a while to clear out dead wood.
+
+## Service Integration
+
+The `service` directory includes service integration scripts that you can use after you have
+used `./run` to fire up a container.
+
+### `upstart` Integration
+
+`service/shibboleth-idp.conf` is for `upstart`-based systems such as Ubuntu 14.04 LTS.
+To work round a [known problem in Docker](https://github.com/docker/docker/issues/6647),
+it makes use of the `inotifywait` command from the `inotify-tools` package, which may
+not already be installed.
+
+Install the service configuration as follows:
+
+    # apt-get install inotify-tools
+    # cp service/shibboleth-idp.conf /etc/init
+    # initctl start shibboleth-idp
+
+### `systemd` Integration
+
+`service/shibboleth-idp` is for `systemd`-based systems. It is at present untested.
 
 ## OpenSSL Tips
 
