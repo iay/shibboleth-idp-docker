@@ -1,18 +1,13 @@
 #!/bin/bash
 
 #
-# Fetch the Shibboleth and Jetty releases to use.
+# Fetch the Shibboleth release to use.
 #
 
 # Shibboleth release location
 SHIB_RELEASE=3.0.0
 SHIB_RELDIR=http://shibboleth.net/downloads/identity-provider/$SHIB_RELEASE
 SHIB_PREFIX=shibboleth-identity-provider-$SHIB_RELEASE
-
-# Jetty release location
-JETTY_RELEASE=9.2.6.v20141205
-JETTY_RELDIR=http://download.eclipse.org/jetty/stable-9/dist
-JETTY_PREFIX=jetty-distribution-$JETTY_RELEASE
 
 # Fetch everything into a clean download directory
 rm -rf fetched
@@ -34,23 +29,8 @@ sha256sum --check $SHIB_PREFIX.tar.gz.sha256
 # Verify GPG signature on Shibboleth release
 gpg $PREFIX.tar.gz.asc
 
-# Fetch the Jetty release
-wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz
-wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz.sha1
-wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz.asc
-wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz.asc.sha1
-
-# Verify SHA-1 checksum on Jetty release
-#sha1sum --check $JETTY_PREFIX.tar.gz.sha1
-#sha1sum --check $JETTY_PREFIX.tar.gz.asc.sha1
-cat $JETTY_PREFIX.tar.gz.sha1
-echo
-sha1sum $JETTY_PREFIX.tar.gz
-
 # Unpack everything and rename to standard directories
 tar xf $SHIB_PREFIX.tar.gz
-tar xf $JETTY_PREFIX.tar.gz
 mv $SHIB_PREFIX shibboleth-dist
-mv $JETTY_PREFIX jetty
 
 # End.

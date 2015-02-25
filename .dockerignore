@@ -1,7 +1,6 @@
 # Files to be ignored by Docker
 
 .git
-fetched/*.gz
-fetched/shibboleth-dist
+fetched/
 shibboleth-idp/
-shibboleth-idp-v2/
+shibboleth-idp-*/

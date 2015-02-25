@@ -1,10 +1,11 @@
 #!/bin/bash
 
 #
-# Assumes that "fetch" has already been run to acquire the
-# Shibboleth and Jetty distributions.
+# Assumes that "fetch-jetty" has already been run to acquire the
+# Jetty distribution.
 #
 
+# Fetch the most recent base image, as it is updated frequently
 docker pull dockerfile/java:oracle-java8
 
 docker build -t shibboleth-idp .

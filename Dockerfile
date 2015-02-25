@@ -35,7 +35,7 @@ ADD UnlimitedJCEPolicyJDK8/US_export_policy.jar ${JAVA_HOME}/jre/lib/security/
 #
 RUN javac Test.java && java Test && rm Test.class
 
-ADD fetched/jetty          ${JETTY_HOME}
+ADD jetty-dist/dist          ${JETTY_HOME}
 
 EXPOSE 443 8443 80
 

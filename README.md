@@ -19,7 +19,7 @@ recommend the use of Oracle's version.
 This Docker build is therefore based on the `oracle-java8` tagged variant of
 the [`dockerfile/java`](https://registry.hub.docker.com/u/dockerfile/java/) image.
 This is an automated build providing the latest Oracle JDK in an Ubuntu
-14.04 (Trusty Tahr) environment. It's quite a large image (about 750MB) but
+14.04 LTS (Trusty Tahr) environment. It's quite a large image (about 750MB) but
 as I use it for most of my development it's shared between many containers and
 I don't find the size to be a significant issue in practice.
 
@@ -38,15 +38,39 @@ You will need to accept their license agreement to do this, which is why I don't
 * `gunzip jce_policy-8.zip` will generate the `UnlimitedJCEPolicyJDK8`
 directory assumed by the `Dockerfile`.
 
-## Fetching Shibboleth and Jetty Distributions
+## Fetching the Jetty Distribution
 
-You should execute the `./fetch` script to pull down copies of the Shibboleth IdP distribution and Jetty.
-Variables at the top of that file control the version acquired. Some minimal validation is performed of
-the downloaded files, but at present it's on a "leap of faith" basis as the key file for Shibboleth is
-pulled down from the same server and simply trusted, and Jetty's approach to distribution signing has
-been a little hit and miss. Feel free to submit a pull request if you have a better way of handling this.
+You should execute the `./fetch-jetty` script to pull down a copy of the Jetty distribution
+into `jetty-dist/dist`. A variable at the top of the script controls the version acquired.
 
-The distributions are pulled into `fetched/shibboleth-dist` and `fetched/jetty`.
+Some minimal validation is performed of the downloaded file, but at present it's on a "leap of faith"
+basis as Jetty's approach to distribution signing has been a little hit and miss. Feel free to submit
+a pull request if you have a better way of handling this.
+
+## Building the Image
+
+Execute the `./build` script to fetch the latest base image and build a new container image. This new image will be
+tagged as `shibboleth-idp` and incorporate the Jetty distribution fetched earlier. It will *not* include
+the contents of `shibboleth-idp`; instead, they will be mounted into the container at `/opt/shibboleth-idp` when
+a container is run from the image.
+
+One important result of this approach is that the container image does not incorporate any secrets that are
+part of the Shibboleth configuration, such as passwords. On the other hand, the container image doesn't really
+contain much of the IdP, just a tailored environment for it.
+
+**Note:** If a new version of Jetty is released and you wish to incorporate it, simply change the
+version at the top of `fetch-jetty`, and then execute `./fetch-jetty` and `./build`. Then,
+terminate and re-create your container. You don't need to reinstall Shibboleth for this, as it's
+not part of the image.
+
+## Fetching the Shibboleth Distribution
+
+You should execute the `./fetch-shib` script to pull down a copy of the Shibboleth IdP distribution
+into `fetched/shibboleth-dist`. A variable at the top of the script controls the version acquired.
+
+Some minimal validation is performed of the downloaded file, but at present it's on a "leap of faith"
+basis as the key file for Shibboleth is pulled down from the same server and simply trusted.
+Feel free to submit a pull request if you have a better way of handling this.
 
 ## Shibboleth "Install"
 
@@ -73,17 +97,6 @@ be idempotent; you should be able to just run `./install` at any time without ch
 case, the variables set at the top of the `install` script won't have any effect as the appropriate values
 are already frozen into the configuration.
 
-
-## Building the Image
-
-Execute the `./build` script to fetch the latest base image and build a new container image. This new image will be
-tagged as `shibboleth-idp` and incorporate the Jetty distribution fetched earlier. It will *not* include
-the contents of `shibboleth-idp`; instead, they will be mounted into the container at `/opt/shibboleth-idp` when
-a container is run from the image.
-
-One important result of this approach is that the container image does not incorporate any secrets that are
-part of the Shibboleth configuration, such as passwords. On the other hand, the container image doesn't really
-contain much of the IdP, just a tailored environment for it.
 
 ## Executing the Container
 
