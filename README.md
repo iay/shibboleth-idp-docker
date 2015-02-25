@@ -1,10 +1,10 @@
 # `shibboleth-idp-docker`
 
-## Shibboleth V3.0 Identity Provider Deployment using Docker
+## Shibboleth v3 Identity Provider Deployment using Docker
 
 This project is a workspace in which I am experimenting with deploying the
 [Shibboleth](http://shibboleth.net)
-[V3.0 Identity Provider](https://wiki.shibboleth.net/confluence/display/IDP30/Home)
+[v3 Identity Provider](https://wiki.shibboleth.net/confluence/display/IDP30/Home)
 software using the [Docker](http://www.docker.com) container technology.
 
 There's no guarantee that anything here actually works, but if you find
@@ -19,8 +19,9 @@ recommend the use of Oracle's version.
 This Docker build is therefore based on the `oracle-java8` tagged variant of
 the [`dockerfile/java`](https://registry.hub.docker.com/u/dockerfile/java/) image.
 This is an automated build providing the latest Oracle JDK in an Ubuntu
-14.04 (Trusty Tahr) environment. It's quite a large container (about 750MB) but
-as I use it for most of my development I don't find it to be significant in practice.
+14.04 (Trusty Tahr) environment. It's quite a large image (about 750MB) but
+as I use it for most of my development it's shared between many containers and
+I don't find the size to be a significant issue in practice.
 
 One limitation of this base container is that it doesn't include the
 [Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files]
