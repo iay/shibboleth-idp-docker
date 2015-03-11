@@ -68,9 +68,8 @@ not part of the image.
 You should execute the `./fetch-shib` script to pull down a copy of the Shibboleth IdP distribution
 into `fetched/shibboleth-dist`. A variable at the top of the script controls the version acquired.
 
-Some minimal validation is performed of the downloaded file, but at present it's on a "leap of faith"
-basis as the key file for Shibboleth is pulled down from the same server and simply trusted.
-Feel free to submit a pull request if you have a better way of handling this.
+Some minimal validation is performed of the downloaded file using a file of PGP keys published by
+the Shibboleth project and included here to avoid taking a complete "leap of faith" approach.
 
 ## Shibboleth "Install"
 
