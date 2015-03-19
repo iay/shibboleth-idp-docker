@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 docker stop shibboleth-idp
+sleep 5
 docker rm shibboleth-idp
