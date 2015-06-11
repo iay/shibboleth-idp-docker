@@ -5,7 +5,4 @@
 # Jetty distribution.
 #
 
-# Fetch the most recent base image, as it is updated frequently
-docker pull dockerfile/java:oracle-java8
-
 docker build -t shibboleth-idp .

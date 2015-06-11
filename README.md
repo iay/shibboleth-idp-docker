@@ -16,27 +16,16 @@ Although the Shibboleth IdP *usually* works with the OpenJDK variant of
 Java, there have historically been some problems with it and we therefore
 recommend the use of Oracle's version.
 
-This Docker build is therefore based on the `oracle-java8` tagged variant of
-the [`dockerfile/java`](https://registry.hub.docker.com/u/dockerfile/java/) image.
-This is an automated build providing the latest Oracle JDK in an Ubuntu
-14.04 LTS (Trusty Tahr) environment. It's quite a large image (about 750MB) but
-as I use it for most of my development it's shared between many containers and
-I don't find the size to be a significant issue in practice.
-
-One limitation of this base container is that it doesn't include the
+This Docker build is therefore based on my
+[`iay/java:oracle-8`](https://github.com/iay/java-docker) image, which
+incidentally includes the
 [Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files]
 (http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html).
 Without these, the IdP can't use some useful encryption algorithms with "long" keys.
 One important example is 256-bit AES, which is eligible for use in XML encryption
 of messages sent to service providers.
 
-The solution to this is to install the policy files as part of the `docker build`
-operation, and the `Dockerfile` assumes you have them available:
-
-* Download `jce_policy-8.zip` [from Oracle](http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html).
-You will need to accept their license agreement to do this, which is why I don't just include the files here.
-* `gunzip jce_policy-8.zip` will generate the `UnlimitedJCEPolicyJDK8`
-directory assumed by the `Dockerfile`.
+You need to build a copy of that image locally before building this image.
 
 ## Fetching the Jetty Distribution
 
