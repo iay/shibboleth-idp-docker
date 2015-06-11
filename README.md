@@ -38,7 +38,7 @@ a pull request if you have a better way of handling this.
 
 ## Building the Image
 
-Execute the `./build` script to fetch the latest base image and build a new container image. This new image will be
+Execute the `./build` script to build a new container image. This new image will be
 tagged as `shibboleth-idp` and incorporate the Jetty distribution fetched earlier. It will *not* include
 the contents of `shibboleth-idp`; instead, they will be mounted into the container at `/opt/shibboleth-idp` when
 a container is run from the image.
