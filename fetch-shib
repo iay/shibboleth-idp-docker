@@ -5,7 +5,7 @@
 #
 
 # Shibboleth release location
-SHIB_RELEASE=3.1.1
+SHIB_RELEASE=3.1.2
 SHIB_RELDIR=http://shibboleth.net/downloads/identity-provider/$SHIB_RELEASE
 SHIB_PREFIX=shibboleth-identity-provider-$SHIB_RELEASE
 
