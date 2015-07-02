@@ -28,7 +28,7 @@ One important example is 256-bit AES, which is eligible for use in XML encryptio
 of messages sent to service providers.
 
 As Oracle's license conditions means that I can't distribute that image,
-would will need to build a copy of it locally before building this image
+you will need to build a copy of it locally before building this image
 on top of it.
 
 ## Fetching the Jetty Distribution
