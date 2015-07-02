@@ -7,7 +7,9 @@ This project is a workspace in which I am experimenting with deploying the
 [v3 Identity Provider](https://wiki.shibboleth.net/confluence/display/IDP30/Home)
 software using the [Docker](http://www.docker.com) container technology.
 
-There's no guarantee that anything here actually works, but if you find
+Although this is what I'm using to deploy my own, rather minimal,
+identity provider in "production", there's no guarantee that anything
+here actually works. If you find
 something useful you're welcome to take advantage of it.
 
 ## Base Image and Java
@@ -25,7 +27,9 @@ Without these, the IdP can't use some useful encryption algorithms with "long" k
 One important example is 256-bit AES, which is eligible for use in XML encryption
 of messages sent to service providers.
 
-You need to build a copy of that image locally before building this image.
+As Oracle's license conditions means that I can't distribute that image,
+would will need to build a copy of it locally before building this image
+on top of it.
 
 ## Fetching the Jetty Distribution
 
