@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#
+# Reload a service within the IdP.
+#
+# This script should be run *outside* the container by the host OS's
+# cron or equivalent. The actual operation is performed *inside* the docker
+# container, using docker exec.
+#
+# Parameters are for the reload-service.sh script:
+#
+#   ./reload-service -id <service name>
+#
+# Examples:
+#
+#   ./reload-service -id shibboleth.AttributeFilterService
+#   ./reload-service -id shibboleth.MetadataResolverService
+#
+
+# Home of the IdP *within* the container.
+IDP_HOME=/opt/shibboleth-idp
+
+docker exec shibboleth-idp $IDP_HOME/bin/reload-service.sh "$@"
+
+# End.
