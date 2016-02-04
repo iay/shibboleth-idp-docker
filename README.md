@@ -92,6 +92,9 @@ are already frozen into the configuration.
 
 ## Executing the Container
 
+Before executing the container, please change the `IPADDR` variable in the files `test` and `run`
+to match your host's IP address, e.g. `127.0.0.1`.
+
 Start a randomly named container from the image using the `./test` script. This is set up to be an interactive
 container; you will see a couple of lines of logging and then it will appear to pause. Use ^C to stop the
 container; it will be automatically removed when you do so.
