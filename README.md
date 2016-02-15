@@ -27,7 +27,7 @@ Without these, the IdP can't use some useful encryption algorithms with "long" k
 One important example is 256-bit AES, which is eligible for use in XML encryption
 of messages sent to service providers.
 
-As Oracle's license conditions means that I can't distribute that image,
+As Oracle's license conditions mean that I can't distribute that image,
 you will need to build a copy of it locally before building this image
 on top of it.
 
@@ -162,7 +162,7 @@ Again, you'll be prompted for any relevant passwords.
 
 ## Copyright and License
 
-The entire package is Copyright (C) 2014, Ian A. Young.
+The entire package is Copyright (C) 2014--2016, Ian A. Young.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
