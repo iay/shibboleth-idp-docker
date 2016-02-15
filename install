@@ -59,6 +59,7 @@ $DIST/bin/install.sh \
     -Didp.scope=$SCOPE \
     -Didp.host.name=$HOST \
     -Didp.sealer.password=$SEALPASS \
+    -Didp.keystore.password=$UFPASS \
     -Didp.noprompt=true \
     -Didp.jetty.config=true
 
