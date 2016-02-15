@@ -5,7 +5,7 @@
 #
 
 # Jetty release location
-JETTY_RELEASE=9.2.14.v20151106
+JETTY_RELEASE=9.2.15.v20160210
 JETTY_RELDIR=http://download.eclipse.org/jetty/$JETTY_RELEASE/dist
 JETTY_PREFIX=jetty-distribution-$JETTY_RELEASE
 
