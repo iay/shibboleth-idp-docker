@@ -118,7 +118,7 @@ By default, the container's port 443 and 8443 are bound to the Docker host's sam
 available interfaces. This is probably the right choice for most people. If you need to override this, you
 can set `IPADDR` to a specific IP address in the `CONFIG` file.
 
-Setting `IPADDR=127.0.0.1`, for example, cmight be useful to allow access to the IdP from only the
+Setting `IPADDR=127.0.0.1`, for example, might be useful to allow access to the IdP from only the
 Docker host itself during testing. Another use for `IPADDR` would be to single out a specific host
 interface on a multi-homed host.
 
