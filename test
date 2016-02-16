@@ -4,9 +4,7 @@
 # Run the IdP container in a test mode in a randomly named
 # container which terminates and is removed on Ctrl+C.
 #
-
-# IP address of the Docker host interface to bind to
-IPADDR=192.168.117.26
+. script-functions
 
 docker run -i -t --rm \
     -v `pwd`/shibboleth-idp:/opt/shibboleth-idp \

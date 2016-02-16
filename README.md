@@ -107,6 +107,20 @@ be idempotent; you should be able to just run `./install` at any time without ch
 case, the variables set at the top of the `install` script won't have any effect as the appropriate values
 are already frozen into the configuration.
 
+## Container Configuration
+
+A rudimentary mechanism is provided to allow configuration of the scripts provided to interact with the Docker
+container. Each relevant script defers configuration to `script-functions`, which sets defaults and then in turn
+invokes `CONFIG` (if present) to override those defaults. An example `CONFIG` file is provided as
+`CONFIG.example`.
+
+By default, the container's port 443 and 8443 are bound to the Docker host's same-numbered ports on all
+available interfaces. This is probably the right choice for most people. If you need to override this, you
+can set `IPADDR` to a specific IP address in the `CONFIG` file.
+
+Setting `IPADDR=127.0.0.1`, for example, cmight be useful to allow access to the IdP from only the
+Docker host itself during testing. Another use for `IPADDR` would be to single out a specific host
+interface on a multi-homed host.
 
 ## Executing the Container
 

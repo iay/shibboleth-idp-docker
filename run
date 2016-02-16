@@ -4,9 +4,7 @@
 # Run the IdP container in a production mode in a container
 # with a specific name.
 #
-
-# IP address of the Docker host interface to bind to
-IPADDR=192.168.117.26
+. script-functions
 
 docker run -d \
     --name=shibboleth-idp --hostname="shibboleth-idp" \

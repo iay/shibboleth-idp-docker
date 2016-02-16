@@ -1,0 +1,30 @@
+#
+# script-functions
+#
+# Common functions for the scripts in the shibboleth-idp-docker
+# project.
+#
+
+#
+# Default properties; may be overridden by assignments in
+# an optional CONFIG file.
+#
+
+#
+# IPADDR
+#
+# IP address to bind to. By default, bind to all Docker host interfaces
+#
+# One alternative is to bind to a particular host interface on a
+# Docker host which has multiple interfaces. Another is to bind to
+# the localhost address (127.0.0.1) for local testing.
+#
+IPADDR=0.0.0.0
+
+#
+# Override settings if a CONFIG file exists.
+#
+if [ -s CONFIG ]; then
+   . CONFIG
+fi
+
