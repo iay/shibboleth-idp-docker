@@ -4,7 +4,7 @@
 
 #
 # Base everything on my Oracle Java 8 JDK container, which
-# incorporates the Unimited Strength Jurisdiction Policy Files
+# incorporates the Unlimited Strength Jurisdiction Policy Files
 # required for things like AES-256.
 #
 FROM iay/java:oracle-8

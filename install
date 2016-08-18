@@ -31,7 +31,7 @@ IDP_HOME=`pwd`/shibboleth-idp
 #
 
 I=$DIST/idp.install.properties
-echo \# Properties controlling the installation of the Shibbolth IdP>$I
+echo \# Properties controlling the installation of the Shibboleth IdP>$I
 # Uncomment the following to preserve the property files
 # echo idp.no.tidy=true>>$I
 
