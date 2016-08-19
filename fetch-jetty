@@ -5,8 +5,8 @@
 #
 
 # Jetty release location
-JETTY_RELEASE=9.2.15.v20160210
-JETTY_RELDIR=http://download.eclipse.org/jetty/$JETTY_RELEASE/dist
+JETTY_RELEASE=9.2.18.v20160721
+JETTY_RELDIR=https://build.shibboleth.net/nexus/content/repositories/thirdparty/org/eclipse/jetty/jetty-distribution/$JETTY_RELEASE
 JETTY_PREFIX=jetty-distribution-$JETTY_RELEASE
 
 # Fetch everything into a clean download directory
