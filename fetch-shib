@@ -3,11 +3,15 @@
 #
 # Fetch the Shibboleth release to use.
 #
+. VERSIONS
 
 # Shibboleth release location
-SHIB_RELEASE=3.2.1
 SHIB_RELDIR=http://shibboleth.net/downloads/identity-provider/$SHIB_RELEASE
 SHIB_PREFIX=shibboleth-identity-provider-$SHIB_RELEASE
+
+# Jetty base release location
+BASE_RELDIR=https://build.shibboleth.net/nexus/content/repositories/releases/net/shibboleth/idp/idp-jetty-base/$BASE_RELEASE
+BASE_PREFIX=idp-jetty-base-$BASE_RELEASE
 
 # Import Shibboleth project keys
 gpg --import SHIB_KEYS
@@ -22,14 +26,31 @@ wget $SHIB_RELDIR/$SHIB_PREFIX.tar.gz
 wget $SHIB_RELDIR/$SHIB_PREFIX.tar.gz.asc
 wget $SHIB_RELDIR/$SHIB_PREFIX.tar.gz.sha256
 
-# Verify SHA-256 checksum on Shibboleth release
+# Verify SHA-256 checksum on IdP release
 sha256sum --check $SHIB_PREFIX.tar.gz.sha256
 
-# Verify GPG signature on Shibboleth release
+# Verify GPG signature on IdP release
 gpg $SHIB_PREFIX.tar.gz.asc
 
-# Unpack everything and rename to standard directories
+# Unpack IdP and rename to standard directories
 tar xf $SHIB_PREFIX.tar.gz
 mv $SHIB_PREFIX shibboleth-dist
+
+# Fetch the Jetty base release
+wget $BASE_RELDIR/$BASE_PREFIX.tar.gz
+wget $BASE_RELDIR/$BASE_PREFIX.tar.gz.asc
+wget $BASE_RELDIR/$BASE_PREFIX.tar.gz.sha256
+
+# Verify SHA-256 checksum on Jetty base release
+sha256sum --check $BASE_PREFIX.tar.gz.sha256
+
+# Verify GPG signature on Jetty base release
+gpg $BASE_PREFIX.tar.gz.asc
+
+# Unpack the Jetty base release and move it into the right
+# place in the Shibboleth distribution
+tar xf $BASE_PREFIX.tar.gz
+mkdir shibboleth-dist/embedded
+mv jetty-base shibboleth-dist/embedded/
 
 # End.

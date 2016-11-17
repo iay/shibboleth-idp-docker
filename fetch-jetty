@@ -3,9 +3,9 @@
 #
 # Fetch the Jetty release to use.
 #
+. VERSIONS
 
 # Jetty release location
-JETTY_RELEASE=9.2.18.v20160721
 JETTY_RELDIR=https://build.shibboleth.net/nexus/content/repositories/thirdparty/org/eclipse/jetty/jetty-distribution/$JETTY_RELEASE
 JETTY_PREFIX=jetty-distribution-$JETTY_RELEASE
 

@@ -4,6 +4,7 @@
 # Run the IdP container in a production mode in a container
 # with a specific name.
 #
+. VERSIONS
 . script-functions
 
 docker run -d \
@@ -11,4 +12,4 @@ docker run -d \
     -v `pwd`/shibboleth-idp:/opt/shibboleth-idp \
     -p $IPADDR:443:443 \
     -p $IPADDR:8443:8443 \
-    shibboleth-idp
+    shibboleth-idp:$JETTY_VERSION

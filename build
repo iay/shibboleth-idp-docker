@@ -4,5 +4,6 @@
 # Assumes that "fetch-jetty" has already been run to acquire the
 # Jetty distribution.
 #
+. VERSIONS
 
-docker build -t shibboleth-idp .
+docker build -t shibboleth-idp:$JETTY_VERSION .
