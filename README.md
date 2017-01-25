@@ -64,33 +64,11 @@ into `fetched/shibboleth-dist`. A variable at the top of the script controls the
 Some minimal validation is performed of the downloaded file using a file of PGP keys published by
 the Shibboleth project and included here to avoid taking a complete "leap of faith" approach.
 
-## Installing Host Java
-
-The `install` script relies on executing the Shibboleth installation process *outside* the container.
-This is not ideal, and at some point I may move to performing this operation inside a second
-container spun up for the purpose. For the moment, though, this means that you need to install
-Java on your Docker host and note its home location. The OpenJDK variant of Java 7 is sufficient
-for this.
-
-On an Ubuntu 14.04 LTS system, the installation of Java on your host can be performed as follows:
-
-    # apt-get install openjdk-7-jre
-
-Your "Java home" can normally be found by looking in `/usr/lib/jvm`:
-
-    # ls /usr/lib/jvm
-    java-1.7.0-openjdk-amd64  java-7-openjdk-amd64
-
-In this case, you can use `/usr/lib/jvm/java-7-openjdk-amd64` as your "Java home".
-
 ## Shibboleth "Install"
 
-Before attempting the next step, you should edit the `install` script to change the critical
+Before attempting the next step, you should edit the `install-idp` script to change the critical
 parameters at the top:
 
-* `JAVA_HOME`: this should be set to your Docker host's Java home location as determined in
-the "Installing Java" section above.
-The provided value works on Ubuntu 14.04 LTS but your platform may well differ.
 * `UFPASS` and `SEALERPASS` are passwords to use if the user-facing TLS credential or data sealer keystores,
 respectively, need to be generated. It's arguable whether changing the default `X-changethis` values
 really adds any security given that the values are just put in the clear in property files anyway.
@@ -98,9 +76,9 @@ really adds any security given that the values are just put in the clear in prop
 * `HOST` is built from `SCOPE` by prepending `idp2.`, which probably won't suit you.
 * `ENTITYID` is built from `HOST`. The default here is the same as the interactive install would suggest.
 
-Executing the `./install` script will now run the Shibboleth install process. If you do not have a `shibboleth-idp`
-directory, this will act like a first-time install using the parameters you set before, resulting in a
-basic installation in that directory.
+Executing the `./install` script will now run the Shibboleth install process in a container based on the
+`iay/java:oracle-8` image. If you do not have a `shibboleth-idp` directory, this will act like a first-time
+install using the parameters you set before, resulting in a basic installation in that directory.
 
 If `shibboleth-idp` already exists, `./install` will act to upgrade it to the latest distribution. This should
 be idempotent; you should be able to just run `./install` at any time without changing the results. In this
