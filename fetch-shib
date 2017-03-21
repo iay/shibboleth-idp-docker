@@ -27,6 +27,7 @@ wget $SHIB_RELDIR/$SHIB_PREFIX.tar.gz.asc
 wget $SHIB_RELDIR/$SHIB_PREFIX.tar.gz.sha256
 
 # Verify SHA-256 checksum on IdP release
+echo SHA-256 check for $SHIB_PREFIX.tar.gz:
 sha256sum --check $SHIB_PREFIX.tar.gz.sha256
 
 # Verify GPG signature on IdP release
@@ -37,19 +38,25 @@ tar xf $SHIB_PREFIX.tar.gz
 mv $SHIB_PREFIX shibboleth-dist
 
 # Fetch the Jetty base release
-wget $BASE_RELDIR/$BASE_PREFIX.tar.gz
-wget $BASE_RELDIR/$BASE_PREFIX.tar.gz.asc
-wget $BASE_RELDIR/$BASE_PREFIX.tar.gz.sha256
+BASE_ARCHIVE=$BASE_PREFIX.tar.gz
+wget $BASE_RELDIR/$BASE_ARCHIVE
+wget $BASE_RELDIR/$BASE_ARCHIVE.asc
+wget $BASE_RELDIR/$BASE_ARCHIVE.sha1
 
-# Verify SHA-256 checksum on Jetty base release
-sha256sum --check $BASE_PREFIX.tar.gz.sha256
+# Rewrite the SHA-1 checksum with a file name
+checksum=$(cat $BASE_ARCHIVE.sha1)
+echo $checksum $BASE_ARCHIVE>$BASE_ARCHIVE.sha1
+
+# Verify SHA-1 checksum on Jetty base release
+echo SHA-1 check for $BASE_ARCHIVE:
+sha1sum --check $BASE_ARCHIVE.sha1
 
 # Verify GPG signature on Jetty base release
-gpg $BASE_PREFIX.tar.gz.asc
+gpg $BASE_ARCHIVE.asc
 
 # Unpack the Jetty base release and move it into the right
 # place in the Shibboleth distribution
-tar xf $BASE_PREFIX.tar.gz
+tar xf $BASE_ARCHIVE
 mkdir shibboleth-dist/embedded
 mv jetty-base shibboleth-dist/embedded/
 

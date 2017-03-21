@@ -17,7 +17,7 @@ JETTY_RELEASE=$JETTY_VERSION.$JETTY_DATE
 #
 # Shibboleth IdP
 #
-SHIB_RELEASE=3.3.0
+SHIB_RELEASE=3.3.1
 
 #
 # Shibboleth Jetty base
