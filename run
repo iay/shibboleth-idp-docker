@@ -7,7 +7,7 @@
 . VERSIONS
 . script-functions
 
-docker run -d \
+docker run -d --restart=unless-stopped \
     --name=shibboleth-idp --hostname="shibboleth-idp" \
     -v `pwd`/shibboleth-idp:/opt/shibboleth-idp \
     -p $IPADDR:443:443 \
