@@ -3,11 +3,10 @@
 #
 
 #
-# Base everything on my Oracle Java 8 JDK container, which
-# incorporates the Unlimited Strength Jurisdiction Policy Files
-# required for things like AES-256.
+# The base Java image to use is determined by a build argument.
 #
-FROM iay/java:oracle-8
+ARG JAVA_VERSION
+FROM ${JAVA_VERSION}
 
 MAINTAINER Ian Young <ian@iay.org.uk>
 

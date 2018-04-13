@@ -6,4 +6,7 @@
 #
 . VERSIONS
 
-docker build -t shibboleth-idp:$JETTY_VERSION .
+docker pull $JAVA_VERSION
+
+docker build --build-arg JAVA_VERSION=$JAVA_VERSION \
+    -t shibboleth-idp:$JETTY_VERSION .
