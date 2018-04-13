@@ -7,7 +7,7 @@
 #
 # Base image to use for the build.
 #
-JAVA_VERSION=openjdk:8-slim
+JAVA_VERSION=openjdk:10-slim
 
 #
 # Jetty
