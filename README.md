@@ -172,7 +172,7 @@ Again, you'll be prompted for any relevant passwords.
 
 ## Copyright and License
 
-The entire package is Copyright (C) 2014--2016, Ian A. Young.
+The entire package is Copyright (C) 2014&ndash;2018, Ian A. Young.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
