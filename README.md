@@ -52,7 +52,7 @@ part of the Shibboleth configuration, such as passwords. On the other hand, the 
 contain much of the IdP, just a tailored environment for it.
 
 **Note:** If a new version of Jetty is released and you wish to incorporate it, simply change the
-version at the top of `fetch-jetty`, and then execute `./fetch-jetty` and `./build`. Then,
+version components in `VERSIONS`, and then execute `./fetch-jetty` and `./build`. Then,
 terminate and re-create your container. You don't need to reinstall Shibboleth for this, as it's
 not part of the image.
 
