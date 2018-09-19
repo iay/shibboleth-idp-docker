@@ -14,22 +14,28 @@ something useful you're welcome to take advantage of it.
 
 ## Base Image and Java
 
-Although the Shibboleth IdP *usually* works with the OpenJDK variant of
-Java, there have historically been some problems with it and we therefore
-recommend the use of Oracle's version.
-
-This Docker build is therefore based on my
+The Shibboleth project has traditionally recommended Oracle's version of the Java VM
+for production deployments due to historical problems with the JDK. In the absence of
+a freely available Docker container providing Oracle's Java, I used to base this
+Docker build on my
 [`iay/java:oracle-8`](https://github.com/iay/java-docker) image, which
-incidentally includes the
+incidentally included the
 [Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files]
 (http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html).
-Without these, the IdP can't use some useful encryption algorithms with "long" keys.
+Without those, the IdP wasn't able to use some useful encryption algorithms with "long" keys.
 One important example is 256-bit AES, which is eligible for use in XML encryption
 of messages sent to service providers.
 
-As Oracle's license conditions mean that I can't distribute that image,
-you will need to build a copy of it locally before building this image
-on top of it.
+I now base this build on the official Docker `openjdk` image, specifically on the `-slim` variant
+as we don't need the development tools.
+
+This has been extremely convenient as we race through the versions introduced by the new
+six-monthly Java release cadence, and at least so far I haven't noticed any problems.
+That may well be because my deployment is, as mentioned above, rather minimal. It may also
+be related to the fact that Oracle are bringing their variant and OpenJDK closer and closer
+together with each release, with the expectation that they will be identical from Java 11
+onwards.
+
 
 ## Fetching the Jetty Distribution
 
@@ -77,7 +83,7 @@ really adds any security given that the values are just put in the clear in prop
 * `ENTITYID` is built from `HOST`. The default here is the same as the interactive install would suggest.
 
 Executing the `./install` script will now run the Shibboleth install process in a container based on the
-`iay/java:oracle-8` image. If you do not have a `shibboleth-idp` directory, this will act like a first-time
+configured Docker Java image. If you do not have a `shibboleth-idp` directory, this will act like a first-time
 install using the parameters you set before, resulting in a basic installation in that directory.
 
 If `shibboleth-idp` already exists, `./install` will act to upgrade it to the latest distribution. This should
@@ -125,25 +131,8 @@ to run this once in a while to clear out dead wood.
 
 ## Service Integration
 
-The `service` directory includes service integration scripts that you can use after you have
-used `./run` to fire up a container.
-
-### `upstart` Integration
-
-`service/shibboleth-idp.conf` is for `upstart`-based systems such as Ubuntu 14.04 LTS.
-To work round a [known problem in Docker](https://github.com/docker/docker/issues/6647),
-it makes use of the `inotifywait` command from the `inotify-tools` package, which may
-not already be installed.
-
-Install the service configuration as follows:
-
-    # apt-get install inotify-tools
-    # cp service/shibboleth-idp.conf /etc/init
-    # initctl start shibboleth-idp
-
-### `systemd` Integration
-
-`service/shibboleth-idp` is for `systemd`-based systems. It is at present untested.
+I used to include a `service` directory with service integration scripts for use with `upstart`
+and `systemd`. I have removed these as I no longer use them myself.
 
 ## OpenSSL Tips
 
