@@ -1,0 +1,76 @@
+#!/bin/bash
+
+#
+# Fetch the Shibboleth release to use.
+#
+. VERSIONS
+
+# Destination directory
+DEST=fetched-snap
+
+# Maven coordinates
+MVN_G=net.shibboleth.idp
+MVN_A=idp-distribution
+MVN_R=snapshots
+MVN_V=$SHIB_RELEASE-SNAPSHOT
+
+# Where to get things from
+MVN_RED=https://build.shibboleth.net/nexus/service/local/artifact/maven/redirect
+SHIB_BASE=$MVN_RED\?r=$MVN_R\&g=$MVN_G\&a=$MVN_A\&v=$MVN_V
+#echo "Base: $SHIB_BASE"
+SHIB_PREFIX=shibboleth-identity-provider-$MVN_V
+#echo "Prefix: $SHIB_PREFIX"
+
+# Jetty base release location
+BASE_RELDIR=https://build.shibboleth.net/nexus/content/repositories/releases/net/shibboleth/idp/idp-jetty-base/$BASE_RELEASE
+BASE_PREFIX=idp-jetty-base-$BASE_RELEASE
+
+# Import Shibboleth project keys
+gpg --import SHIB_KEYS
+
+# Fetch everything into a clean download directory
+rm -rf $DEST
+mkdir $DEST
+cd $DEST
+
+# Fetch the IdP release
+SHIB_ARCHIVE=$SHIB_PREFIX.tar.gz
+wget -O $SHIB_ARCHIVE      $SHIB_BASE\&p=tar.gz
+wget -O $SHIB_ARCHIVE.sha1 $SHIB_BASE\&p=tar.gz.sha1
+
+# Rewrite the SHA-1 checksum with a file name
+checksum=$(cat $SHIB_ARCHIVE.sha1)
+echo $checksum $SHIB_ARCHIVE>$SHIB_ARCHIVE.sha1
+
+# Verify SHA-1 checksum on IdP release
+echo SHA-1 check for $SHIB_ARCHIVE
+sha1sum --check $SHIB_ARCHIVE.sha1
+
+# Unpack IdP and rename to standard directories
+tar xf $SHIB_ARCHIVE
+mv $SHIB_PREFIX shibboleth-dist
+
+# Fetch the Jetty base release
+BASE_ARCHIVE=$BASE_PREFIX.tar.gz
+wget $BASE_RELDIR/$BASE_ARCHIVE
+wget $BASE_RELDIR/$BASE_ARCHIVE.asc
+wget $BASE_RELDIR/$BASE_ARCHIVE.sha1
+
+# Rewrite the SHA-1 checksum with a file name
+checksum=$(cat $BASE_ARCHIVE.sha1)
+echo $checksum $BASE_ARCHIVE>$BASE_ARCHIVE.sha1
+
+# Verify SHA-1 checksum on Jetty base release
+echo SHA-1 check for $BASE_ARCHIVE:
+sha1sum --check $BASE_ARCHIVE.sha1
+
+# Verify GPG signature on Jetty base release
+gpg $BASE_ARCHIVE.asc
+
+# Unpack the Jetty base release and move it into the right
+# place in the Shibboleth distribution
+tar xf $BASE_ARCHIVE
+mkdir shibboleth-dist/embedded
+mv jetty-base shibboleth-dist/embedded/
+
+# End.
