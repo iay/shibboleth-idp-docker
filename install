@@ -3,10 +3,11 @@
 #
 # Run the IdP installer in a container.
 #
+. VERSIONS
 
 docker run --rm \
     -v `pwd`/shibboleth-idp:/opt/shibboleth-idp \
     -v `pwd`/fetched/shibboleth-dist:/data/shibboleth-dist \
     -v `pwd`/install-idp:/data/install-idp \
-    iay/java:oracle-8 \
+    ${JAVA_VERSION} \
     /data/install-idp
