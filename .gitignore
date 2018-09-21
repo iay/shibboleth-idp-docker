@@ -1,5 +1,6 @@
 CONFIG
 fetched/
+fetched-*/
 jetty-dist/
 *~
 shibboleth-idp/
