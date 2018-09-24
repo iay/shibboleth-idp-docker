@@ -22,7 +22,6 @@ VOLUME ["${IDP_HOME}"]
 
 WORKDIR ${JETTY_BASE}
 CMD ["java",\
-    "--illegal-access=warn", \
     "-Didp.home=/opt/shibboleth-idp", \
     "-Djetty.base=/opt/shibboleth-idp/jetty-base",\
     "-Djetty.logs=/opt/shibboleth-idp/jetty-base/logs",\
