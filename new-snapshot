@@ -1,0 +1,17 @@
+#!/bin/bash
+
+rm -rf fetched
+rm -rf fetched-snap
+
+./fetch-shib-snapshot
+mv fetched-snap fetched
+
+rm -rf shibboleth-idp-saved
+
+./terminate
+cp -r shibboleth-idp shibboleth-idp-saved
+./install
+
+./run
+
+tail -f shibboleth-idp/logs/idp-process.log
