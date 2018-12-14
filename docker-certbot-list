@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+. script-functions
+
+#
+# Get the latest certbot client.
+#
+docker pull $CERTBOT_IMAGE
+
+docker run --rm -it --label=certbot-list \
+  -v $CERTBOT_VOL_ETC:/etc/letsencrypt \
+  -v $CERTBOT_VOL_LIB:/var/lib/letsencrypt \
+  -v $CERTBOT_VOL_LOG:/var/log/letsencrypt \
+  $CERTBOT_IMAGE certificates

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+#
+# Run this periodically to query Let's Encrypt for a new certificate
+# using the certbot ACME client, and if the certificate as converted
+# into a PKCS12 file for use with Jetty is different, swap it in and
+# reload the IdP.
+#
+./docker-certbot-renew
+./docker-certbot-extract
+./switch-certificates
+
+# End.

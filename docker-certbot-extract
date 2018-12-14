@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+#
+# Extract the live certbot certificate from the Docker volume
+# it is being stored in, and make a PKCS12 file in the IdP's
+# credentials directory. Do not overwrite the IdP's live
+# front-channel certificate file, and do not restart the IdP.
+#
+
+. script-functions
+
+docker run --rm -it --label=certbot-idp-extract \
+  -v $CERTBOT_VOL_ETC:/etc/letsencrypt \
+  -v $IDP_HOME_LOCAL/credentials:/data \
+  ianayoung/openssl openssl pkcs12 -export \
+    -out      /data/idp-userfacing-new.p12 \
+    -inkey    /etc/letsencrypt/live/idp2.iay.org.uk/privkey.pem \
+    -in       /etc/letsencrypt/live/idp2.iay.org.uk/cert.pem \
+    -certfile /etc/letsencrypt/live/idp2.iay.org.uk/chain.pem \
+    -passout  pass:$BROWSER_CERT_PASSWORD

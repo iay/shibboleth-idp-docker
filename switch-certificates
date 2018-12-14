@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+#
+# If the front-channel (i.e., browser-facing) certificate
+# has changed, then switch in the new one.
+#
+
+. script-functions
+
+CREDS=$IDP_HOME_LOCAL/credentials/idp-userfacing
+OLD=$CREDS-old.p12
+CUR=$CREDS.p12
+NEW=$CREDS-new.p12
+
+#
+# The PKCS12 files contain a random salt, so they may be different
+# even if the certificate is the same. We need to extract the
+# certificates and compare those to be certain.
+#
+CERT_CUR=$CREDS.pem
+CERT_NEW=$CREDS-new.pem
+openssl pkcs12 -in $CUR -passin pass:$BROWSER_CERT_PASSWORD \
+   -clcerts -nokeys -nomacver -out $CERT_CUR
+openssl pkcs12 -in $NEW -passin pass:$BROWSER_CERT_PASSWORD \
+   -clcerts -nokeys -nomacver -out $CERT_NEW
+
+if ! cmp --quiet $CERT_NEW $CERT_CUR ; then
+   echo Certificate has changed, swapping in new one.
+   docker stop shibboleth-idp
+   docker wait shibboleth-idp
+   mv $CUR $OLD
+   cp $NEW $CUR
+   docker start shibboleth-idp
+else
+   echo Certificate has not changed.
+fi

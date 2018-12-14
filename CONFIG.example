@@ -1,2 +1,5 @@
 # IP address of the Docker host interface to bind to
 IPADDR=192.168.117.26
+
+# Password for the user-facing credential
+BROWSER_CERT_PASSWORD=userfacing-changethis

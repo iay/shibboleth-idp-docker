@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+. script-functions
+
+#
+# Get the latest certbot client.
+#
+docker pull $CERTBOT_IMAGE
+
+#
+# Acquire the certificate.
+#
+# The live IdP runs on ports 433 and 8443. Port 80 is normally unbound
+# so can be used for the ACME http-01 protocol.
+#
+docker run --rm -it --label=certbot-idp-initial \
+  -v $CERTBOT_VOL_ETC:/etc/letsencrypt \
+  -v $CERTBOT_VOL_LIB:/var/lib/letsencrypt \
+  -v $CERTBOT_VOL_LOG:/var/log/letsencrypt \
+  -p $IPADDR:80:80 \
+  $CERTBOT_IMAGE certonly \
+    --standalone --preferred-challenges http \
+    --domain idp2.iay.org.uk

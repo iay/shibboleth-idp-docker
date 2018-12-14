@@ -11,6 +11,36 @@
 #
 
 #
+# We obtain front-channel certificates from Let's Encrypt using
+# the certbot ACME client. Its state (across potentially many sites)
+# is held in a series of Docker volumes.
+#
+CERTBOT_IMAGE=certbot/certbot
+CERTBOT_VOL_ETC=certbot-etc
+CERTBOT_VOL_LIB=certbot-lib
+CERTBOT_VOL_LOG=certbot-log
+
+#
+# IDP_HOME_LOCAL
+#
+# Root directory of the IdP installation, in local space.
+# The same files will appear at a different location in Docker
+# containers.
+#
+IDP_HOME_LOCAL=$PWD/shibboleth-idp
+
+#
+# CREDENTIAL_DIR
+
+#
+# BROWSER_CERT_PASSWORD
+#
+# Password for the PKCS12 file containing the front-channel
+# (i.e., browser-facing) X.509 credential.
+#
+BROWSER_CERT_PASSWORD=userfacing-changethis
+
+#
 # IPADDR
 #
 # IP address to bind to. By default, bind to all Docker host interfaces
