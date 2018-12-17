@@ -9,7 +9,7 @@
 
 . script-functions
 
-docker run --rm -it --label=certbot-idp-extract \
+docker run --rm --label=certbot-idp-extract \
   -v $CERTBOT_VOL_ETC:/etc/letsencrypt \
   -v $IDP_HOME_LOCAL/credentials:/data \
   ianayoung/openssl openssl pkcs12 -export \
