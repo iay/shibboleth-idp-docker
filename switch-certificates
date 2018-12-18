@@ -31,6 +31,8 @@ if ! cmp --quiet $CERT_NEW $CERT_CUR ; then
    mv $CUR $OLD
    cp $NEW $CUR
    docker start shibboleth-idp
+   echo New certificate:
+   cat $CERT_NEW
 else
-   echo Certificate has not changed.
+   # echo Certificate has not changed.
 fi
