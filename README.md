@@ -40,7 +40,7 @@ onwards.
 ## Fetching the Jetty Distribution
 
 You should execute the `./fetch-jetty` script to pull down a copy of the Jetty distribution
-into `jetty-dist/dist`. A variable at the top of the script controls the version acquired.
+into `jetty-dist/dist`. The variable `SHIB_RELEASE` in the `VERSIONS` file controls the version acquired.
 
 Some minimal validation is performed of the downloaded file, but at present it's on a "leap of faith"
 basis as Jetty's approach to distribution signing has been a little hit and miss. Feel free to submit
