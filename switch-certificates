@@ -33,6 +33,4 @@ if ! cmp --quiet $CERT_NEW $CERT_CUR ; then
    docker start shibboleth-idp
    echo New certificate:
    cat $CERT_NEW
-else
-   # echo Certificate has not changed.
 fi
