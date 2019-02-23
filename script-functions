@@ -13,12 +13,12 @@
 #
 # We obtain front-channel certificates from Let's Encrypt using
 # the certbot ACME client. Its state (across potentially many sites)
-# is held in a series of Docker volumes.
+# is held in a series of directories or Docker volumes.
 #
 CERTBOT_IMAGE=certbot/certbot
-CERTBOT_VOL_ETC=certbot-etc
-CERTBOT_VOL_LIB=certbot-lib
-CERTBOT_VOL_LOG=certbot-log
+CERTBOT_VOL_ETC=/srv/certbot/etc
+CERTBOT_VOL_LIB=/srv/certbot/lib
+CERTBOT_VOL_LOG=/srv/certbot/log
 
 #
 # IDP_HOME_LOCAL
