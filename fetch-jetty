@@ -6,7 +6,8 @@
 . VERSIONS
 
 # Jetty release location
-JETTY_RELDIR=https://build.shibboleth.net/nexus/content/repositories/thirdparty/org/eclipse/jetty/jetty-distribution/$JETTY_RELEASE
+#JETTY_RELDIR=https://build.shibboleth.net/nexus/content/repositories/thirdparty/org/eclipse/jetty/jetty-distribution/$JETTY_RELEASE
+JETTY_RELDIR=https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/$JETTY_RELEASE
 JETTY_PREFIX=jetty-distribution-$JETTY_RELEASE
 
 # Fetch everything into a clean download directory
@@ -18,7 +19,7 @@ cd jetty-dist
 wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz
 wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz.sha1
 wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz.asc
-wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz.asc.sha1
+#wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz.asc.sha1
 
 # Verify SHA-1 checksum on Jetty release
 #sha1sum --check $JETTY_PREFIX.tar.gz.sha1
