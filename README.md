@@ -14,27 +14,32 @@ something useful you're welcome to take advantage of it.
 
 ## Base Image and Java
 
-The Shibboleth project has traditionally recommended Oracle's version of the Java VM
-for production deployments due to historical problems with the JDK. In the absence of
-a freely available Docker container providing Oracle's Java, I used to base this
-Docker build on my
-[`iay/java:oracle-8`](https://github.com/iay/java-docker) image, which
-incidentally included the
+This Docker build is based on [Amazon Corretto][], an OpenJDK distribution
+with long term support. This is produced by Amazon and used for many of their
+own production services.
+
+[Amazon Corretto]: https://aws.amazon.com/corretto/
+
+If you wanted to replace this with another Java distribution, change the definition
+of `JAVA_VERSIONS` in `VERSIONS`:
+
+```
+#
+# Java
+#
+# Base image to use for the build.
+#
+JAVA_VERSION=amazoncorretto:11
+```
+
+Any JDK from Java 7 onwards will _probably_ work, with the proviso that if you
+use something without the
 [Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files]
-(http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html).
-Without those, the IdP wasn't able to use some useful encryption algorithms with "long" keys.
+(http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html)
+or equivalent the IdP won't able to use some useful encryption algorithms with "long" keys.
 One important example is 256-bit AES, which is eligible for use in XML encryption
 of messages sent to service providers.
-
-I now base this build on the official Docker `openjdk` image, specifically on the `-slim` variant
-as we don't need the development tools.
-
-This has been extremely convenient as we race through the versions introduced by the new
-six-monthly Java release cadence, and at least so far I haven't noticed any problems.
-That may well be because my deployment is, as mentioned above, rather minimal. It may also
-be related to the fact that Oracle are bringing their variant and OpenJDK closer and closer
-together with each release, with the expectation that they will be identical from Java 11
-onwards.
+This functionality is built in to all current versions of Java, though.
 
 
 ## Fetching the Jetty Distribution
