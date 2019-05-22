@@ -14,13 +14,13 @@ something useful you're welcome to take advantage of it.
 
 ## Base Image and Java
 
-This Docker build is based on [Amazon Corretto][], an OpenJDK distribution
+This Docker build is based on [Amazon Corretto][] 11, an OpenJDK distribution
 with long term support. This is produced by Amazon and used for many of their
 own production services.
 
 [Amazon Corretto]: https://aws.amazon.com/corretto/
 
-If you wanted to replace this with another Java distribution, change the definition
+If you want to replace this with another Java distribution, change the definition
 of `JAVA_VERSIONS` in `VERSIONS`:
 
 ```
@@ -34,8 +34,7 @@ JAVA_VERSION=amazoncorretto:11
 
 Any JDK from Java 7 onwards will _probably_ work, with the proviso that if you
 use something without the
-[Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files]
-(http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html)
+[Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files](http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html)
 or equivalent the IdP won't able to use some useful encryption algorithms with "long" keys.
 One important example is 256-bit AES, which is eligible for use in XML encryption
 of messages sent to service providers.
