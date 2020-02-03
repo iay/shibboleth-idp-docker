@@ -20,6 +20,8 @@
         <Item>SSL</Item>
         <Item>SSLv2</Item>
         <Item>SSLv3</Item>
+        <Item>TLSv1</Item>
+        <Item>TLSv1.1</Item>
       </Array>
     </Set>
     <Set name="IncludeCipherSuites">
