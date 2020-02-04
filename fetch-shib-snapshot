@@ -21,10 +21,6 @@ SHIB_BASE=$MVN_RED\?r=$MVN_R\&g=$MVN_G\&a=$MVN_A\&v=$MVN_V
 SHIB_PREFIX=shibboleth-identity-provider-$MVN_V
 #echo "Prefix: $SHIB_PREFIX"
 
-# Jetty base release location
-BASE_RELDIR=https://build.shibboleth.net/nexus/content/repositories/releases/net/shibboleth/idp/idp-jetty-base/$BASE_RELEASE
-BASE_PREFIX=idp-jetty-base-$BASE_RELEASE
-
 # Import Shibboleth project keys
 gpg --import SHIB_KEYS
 
@@ -49,28 +45,5 @@ sha1sum --check $SHIB_ARCHIVE.sha1
 # Unpack IdP and rename to standard directories
 tar xf $SHIB_ARCHIVE
 mv $SHIB_PREFIX shibboleth-dist
-
-# Fetch the Jetty base release
-BASE_ARCHIVE=$BASE_PREFIX.tar.gz
-wget $BASE_RELDIR/$BASE_ARCHIVE
-wget $BASE_RELDIR/$BASE_ARCHIVE.asc
-wget $BASE_RELDIR/$BASE_ARCHIVE.sha1
-
-# Rewrite the SHA-1 checksum with a file name
-checksum=$(cat $BASE_ARCHIVE.sha1)
-echo $checksum $BASE_ARCHIVE>$BASE_ARCHIVE.sha1
-
-# Verify SHA-1 checksum on Jetty base release
-echo SHA-1 check for $BASE_ARCHIVE:
-sha1sum --check $BASE_ARCHIVE.sha1
-
-# Verify GPG signature on Jetty base release
-gpg $BASE_ARCHIVE.asc
-
-# Unpack the Jetty base release and move it into the right
-# place in the Shibboleth distribution
-tar xf $BASE_ARCHIVE
-mkdir shibboleth-dist/embedded
-mv jetty-base shibboleth-dist/embedded/
 
 # End.

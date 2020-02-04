@@ -1,14 +1,21 @@
 #!/bin/bash
 
 #
-# Run the IdP container in a test mode in a randomly named
+# Run the IdP container in a test mode in a named
 # container which terminates and is removed on Ctrl+C.
 #
 . VERSIONS
 . script-functions
 
+#
+# Remove previous logs; directory will be recreated.
+#
+rm -rf logs/test-jetty
+
 docker run -i -t --rm \
+    --name=idp-test \
     -v `pwd`/shibboleth-idp:/opt/shibboleth-idp \
+    -v `pwd`/logs/test-jetty:/opt/jetty-base/logs \
     -p $IPADDR:443:443 \
     -p $IPADDR:8443:8443 \
     shibboleth-idp:$JETTY_VERSION

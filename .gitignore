@@ -2,6 +2,17 @@ CONFIG
 fetched/
 fetched-*/
 jetty-dist/
+logs/*/
 *~
 shibboleth-idp/
 shibboleth-idp-*/
+
+#
+# The overlay directory is ignored, except for
+# documentation.
+overlay/*
+!overlay/*.md
+
+#
+# End.
+#

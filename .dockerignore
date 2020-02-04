@@ -1,6 +1,21 @@
-# Files to be ignored by Docker
+#
+# Files to be ignored by Docker: these will not be part of the
+# build context.
+#
 
 .git
 fetched/
+fetched-*/
+logs/
 shibboleth-idp/
 shibboleth-idp-*/
+
+#
+# Only copy the packaged form of any overlays into the build context.
+#
+overlay/*
+!overlay/*.tar
+
+#
+# End.
+#

@@ -6,7 +6,32 @@
 #
 . VERSIONS
 
+#
+# Create empty overlay directories if they don't already exist.
+#
+mkdir -p overlay/jetty-base
+
+#
+# Package the overlays. This allows us to be sure that they can
+# be pulled into the image even if the overlay directories are
+# actually symbolic links.
+#
+OVERLAY_DIR=`pwd`/overlay
+pushd ${OVERLAY_DIR}/jetty-base
+  tar --create --file ${OVERLAY_DIR}/jetty-base.tar .
+popd
+
+#
+# Make sure we have the most recent version of Java available.
+#
 docker pull $JAVA_VERSION
 
+#
+# Build the image.
+#
 docker build --build-arg JAVA_VERSION=$JAVA_VERSION \
     -t shibboleth-idp:$JETTY_VERSION .
+
+#
+# End.
+#

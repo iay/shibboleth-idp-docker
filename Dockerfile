@@ -1,5 +1,10 @@
 #
-# idp-builder dockerfile
+# Shibboleth Identity Provider
+#
+# Builds a partial image for running the Shibboleth Identity Provider.
+#
+# This includes Java, Jetty and the Jetty configuration. At present,
+# the IdP itself and its configuration are mounted into the container.
 #
 
 #
@@ -10,10 +15,26 @@ FROM ${JAVA_VERSION}
 
 MAINTAINER Ian Young <ian@iay.org.uk>
 
+#
+# Jetty itself lives in JETTY_HOME.
+#
 ENV JETTY_HOME=/opt/jetty
-ENV IDP_HOME=/opt/shibboleth-idp
-ENV JETTY_BASE=${IDP_HOME}/jetty-base
 
+#
+# The Jetty base lives in JETTY_BASE, outside the Shibboleth IdP.
+#
+ENV JETTY_BASE=/opt/jetty-base
+
+#
+# A subdirectory of JETTY_BASE is used for Jetty's logs, and is
+# exposed as a volume.
+#
+ENV JETTY_LOGS=${JETTY_BASE}/logs
+VOLUME ["${JETTY_LOGS}"]
+
+ENV IDP_HOME=/opt/shibboleth-idp
+
+ADD jetty-base               ${JETTY_BASE}
 ADD jetty-dist/dist          ${JETTY_HOME}
 
 EXPOSE 443 8443 80
@@ -23,6 +44,15 @@ VOLUME ["${IDP_HOME}"]
 WORKDIR ${JETTY_BASE}
 CMD ["java",\
     "-Didp.home=/opt/shibboleth-idp", \
-    "-Djetty.base=/opt/shibboleth-idp/jetty-base",\
-    "-Djetty.logs=/opt/shibboleth-idp/jetty-base/logs",\
+    "-Djetty.base=/opt/jetty-base",\
+    "-Djetty.logs=/opt/jetty-base/logs",\
     "-jar", "/opt/jetty/start.jar"]
+
+#
+# Add Jetty configuration overlay from a tar archive.
+#
+ADD overlay/jetty-base.tar ${JETTY_BASE}
+
+#
+# End.
+#
