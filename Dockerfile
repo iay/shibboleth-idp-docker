@@ -34,7 +34,15 @@ VOLUME ["${JETTY_LOGS}"]
 
 ENV IDP_HOME=/opt/shibboleth-idp
 
-ADD jetty-base               ${JETTY_BASE}
+#
+# Add the Jetty base.
+#
+ARG JETTY_BASE_VERSION
+ADD jetty-base-${JETTY_BASE_VERSION} ${JETTY_BASE}
+
+#
+# Add the Jetty distribution.
+#
 ADD jetty-dist/dist          ${JETTY_HOME}
 
 EXPOSE 443 8443 80
@@ -51,7 +59,7 @@ CMD ["java",\
 #
 # Add Jetty configuration overlay from a tar archive.
 #
-ADD overlay/jetty-base.tar ${JETTY_BASE}
+ADD overlay/jetty-base-${JETTY_BASE_VERSION}.tar ${JETTY_BASE}
 
 #
 # End.

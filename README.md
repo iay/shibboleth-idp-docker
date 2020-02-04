@@ -60,7 +60,7 @@ that the keystore passwords were not made part of the container image. One disad
 the installer mechanisms used to do this were not part of the supported API.
 
 In the current iteration, the Jetty configuration has been moved inside the container image.
-As part of the build, the `jetty-base` directory in this repository is copied to `/opt/jetty-base`
+As part of the build, the `jetty-base-9.3` directory in this repository is copied to `/opt/jetty-base`
 in the image. This is still _derived_ from the same source, but no longer depends on undocumened
 features of the Shibboleth installer, and comes pre-customised for the container environment.
 Additionally, it lives outside the `/opt/shibboleth-idp` directory, which gives a cleaner

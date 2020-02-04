@@ -12,6 +12,6 @@ An overlay can also be a symbolic link to somewhere else in the filesystem.
 This allows for overlays to be part of another Git repository (overlays are
 not part of this repository, so that it can be public).
 
-## `jetty-base` Overlay
+## `jetty-base-9.3` Overlay
 
-The `overlay/jetty-base` overlay is applied to the Jetty base directory in the image.
+The `overlay/jetty-base-9.3` overlay is applied to the Jetty base directory in the image.

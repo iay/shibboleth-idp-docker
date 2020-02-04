@@ -9,7 +9,7 @@
 #
 # Create empty overlay directories if they don't already exist.
 #
-mkdir -p overlay/jetty-base
+mkdir -p overlay/jetty-base-${JETTY_BASE_VERSION}
 
 #
 # Package the overlays. This allows us to be sure that they can
@@ -17,8 +17,8 @@ mkdir -p overlay/jetty-base
 # actually symbolic links.
 #
 OVERLAY_DIR=`pwd`/overlay
-pushd ${OVERLAY_DIR}/jetty-base
-  tar --create --file ${OVERLAY_DIR}/jetty-base.tar .
+pushd ${OVERLAY_DIR}/jetty-base-${JETTY_BASE_VERSION}
+  tar --create --file ${OVERLAY_DIR}/jetty-base-${JETTY_BASE_VERSION}.tar .
 popd
 
 #
@@ -30,6 +30,7 @@ docker pull $JAVA_VERSION
 # Build the image.
 #
 docker build --build-arg JAVA_VERSION=$JAVA_VERSION \
+    --build-arg JETTY_BASE_VERSION=$JETTY_BASE_VERSION \
     -t shibboleth-idp:$JETTY_VERSION .
 
 #
