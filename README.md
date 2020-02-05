@@ -51,7 +51,7 @@ Some minimal validation is performed of the downloaded file, but at present it's
 basis as Jetty's approach to distribution signing has been a little hit and miss. Feel free to submit
 a pull request if you have a better way of handling this.
 
-## Jetty Configuration
+## Jetty 9.4 Configuration
 
 Prior to 2020-02-04, the Jetty configuration used was part of the IdP installation mounted into
 the running container. The actual configuration used was derived from the Jetty base used by the
@@ -60,20 +60,30 @@ that the keystore passwords were not made part of the container image. One disad
 the installer mechanisms used to do this were not part of the supported API.
 
 In the current iteration, the Jetty configuration has been moved inside the container image.
-As part of the build, the `jetty-base-9.3` directory in this repository is copied to `/opt/jetty-base`
+As part of the build, the `jetty-base-9.4` directory in this repository is copied to `/opt/jetty-base`
 in the image. This is still _derived_ from the same source, but no longer depends on undocumened
 features of the Shibboleth installer, and comes pre-customised for the container environment.
 Additionally, it lives outside the `/opt/shibboleth-idp` directory, which gives a cleaner
 separation between Jetty and the IdP.
 
-This default configuration uses default keystore passwords as follows (in `jetty-base/start.d/idp.ini`):
+This default configuration uses default keystore passwords as follows.
+
+In `jetty-base-9.4/start.d/idp.ini`:
 
 ```
-# Keystore passwords
-## jetty-backchannel.xml
-jetty.backchannel.keystore.password=changeit
-## jetty-ssl-context.xml
-jetty.browser.keystore.password=changeit
+## Keystore password
+jetty.sslContext.keyStorePassword=changeit
+## Truststore password
+jetty.sslContext.trustStorePassword=changeit
+## KeyManager password
+jetty.sslContext.keyManagerPassword=changeit
+```
+
+In `jetty-base-9.4/start.d/idp-backchannel.ini`:
+
+```
+## Backchannel keystore password
+# idp.backchannel.keyStorePassword=changeit
 ```
 
 Arguably, there's little point in changing these values in the obvious way, as whatever you do
@@ -86,12 +96,20 @@ Jetty configuration, you can of course just make a private branch of this reposi
 the files in `jetty-base` directly. I have also provided an overlay system to make this a
 bit cleaner.
 
-If you create, for example, `overlay/jetty-base/start.d/idp.ini`, then that file will overwrite
+If you create, for example, `overlay/jetty-base-9.4/start.d/idp.ini`, then that file will overwrite
 the one taken from `jetty-base`. Anything under `overlay` is ignored by Git so it can be a local
 repository unconnected with this one. I have also made it possible for `overlay/jetty-base` to be
 a symbolic link so that it can link to somewhere _inside_ another local repository.
 
 See [`overlay/README.md`](overlay/README.md) for more detail on the overlay system.
+
+## Jetty 9.3 Configuration
+
+If you're using v3 of the Shibboleth Identity Provider, it's possible to use Jetty 9.3. The remarks
+above for Jetty 9.4 apply with obvious changes: the build will copy in the appropriate Jetty base
+and overlay if you set appropriate values in VERSIONS.
+
+Jetty 9.3 can't be used with v4 of the identity provider, so I will eventually remove this support.
 
 ## Building the Image
 
