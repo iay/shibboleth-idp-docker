@@ -51,6 +51,7 @@ VOLUME ["${IDP_HOME}"]
 
 WORKDIR ${JETTY_BASE}
 CMD ["java",\
+    "-Djdk.tls.ephemeralDHKeySize=2048", \
     "-Didp.home=/opt/shibboleth-idp", \
     "-Djetty.base=/opt/jetty-base",\
     "-Djetty.logs=/opt/jetty-base/logs",\
