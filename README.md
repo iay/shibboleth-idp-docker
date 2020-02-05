@@ -97,8 +97,8 @@ the files in `jetty-base-9.4` directly. I have also provided an overlay system t
 bit cleaner.
 
 If you create, for example, `overlay/jetty-base-9.4/start.d/idp.ini`, then that file will overwrite
-the one taken from `jetty-base`. Anything under `overlay` is ignored by Git so it can be a local
-repository unconnected with this one. I have also made it possible for `overlay/jetty-base` to be
+the one taken from `jetty-base-9.4`. Anything under `overlay` is ignored by Git so it can be a local
+repository unconnected with this one. I have also made it possible for `overlay/jetty-base-9.4` to be
 a symbolic link so that it can link to somewhere _inside_ another local repository.
 
 See [`overlay/README.md`](overlay/README.md) for more detail on the overlay system.
