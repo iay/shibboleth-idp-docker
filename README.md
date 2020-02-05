@@ -93,7 +93,7 @@ round to that, though, I'd be delighted to get a pull request in this area.
 
 If you do want to change these or other values, or make any other local customisations to the
 Jetty configuration, you can of course just make a private branch of this repository and change
-the files in `jetty-base` directly. I have also provided an overlay system to make this a
+the files in `jetty-base-9.4` directly. I have also provided an overlay system to make this a
 bit cleaner.
 
 If you create, for example, `overlay/jetty-base-9.4/start.d/idp.ini`, then that file will overwrite
