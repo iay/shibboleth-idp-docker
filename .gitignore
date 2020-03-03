@@ -6,6 +6,7 @@ logs/*/
 *~
 shibboleth-idp/
 shibboleth-idp-*/
+saved-*/
 
 #
 # The overlay directory is ignored, except for

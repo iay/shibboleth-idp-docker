@@ -1,15 +1,30 @@
 #!/bin/bash
 
+#
+# Fetch the Shibboleth release to use.
+#
+. VERSIONS
+
+#
+# Exit when any command fails
+#
+set -e
+
+#
+# Acquire the new snapshot.
+#
 rm -rf fetched
-rm -rf fetched-snap
-
 ./fetch-shib-snapshot
-mv fetched-snap fetched
 
-rm -rf shibboleth-idp-saved
+#
+# Save the whole of the IdP directory. The save directory's name includes the
+# current date and the Unix epoch time.
+#
+SAVED=saved-$(date +%F-%s)
+rm -rf $SAVED
 
 ./terminate
-cp -r shibboleth-idp shibboleth-idp-saved
+cp -r shibboleth-idp $SAVED
 ./install
 
 ./run

@@ -5,8 +5,16 @@
 #
 . VERSIONS
 
+#
+# Exit when any command fails
+#
+set -e
+
+#
 # Destination directory
-DEST=fetched-snap
+#
+DEST=fetched-${SHIB_RELEASE}-$(date +%F)
+DEST2=fetched
 
 # Maven coordinates
 MVN_G=net.shibboleth.idp
@@ -45,5 +53,12 @@ sha1sum --check $SHIB_ARCHIVE.sha1
 # Unpack IdP and rename to standard directories
 tar xf $SHIB_ARCHIVE
 mv $SHIB_PREFIX shibboleth-dist
+
+cd ..
+
+# Copy to normal "fetched" directory
+echo "Downloaded to $DEST, copying to $DEST2."
+rm -rf $DEST2
+cp -r $DEST $DEST2
 
 # End.
