@@ -9,6 +9,7 @@ fetched-*/
 logs/
 shibboleth-idp/
 shibboleth-idp-*/
+saved-*/
 
 #
 # Only copy the packaged form of any overlays into the build context.

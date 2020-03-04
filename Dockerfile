@@ -45,7 +45,7 @@ ADD jetty-base-${JETTY_BASE_VERSION} ${JETTY_BASE}
 #
 ADD jetty-dist/dist          ${JETTY_HOME}
 
-EXPOSE 443 8443 80
+EXPOSE 443 8443
 
 VOLUME ["${IDP_HOME}"]
 
