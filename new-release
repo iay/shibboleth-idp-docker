@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#
+# Install a new release from the "fetched" directory, saving the previous
+# state of the IdP in case we want to go back to it.
+#
+
+#
+# Exit when any command fails
+#
+set -e
+
+#
+# Save the whole of the IdP directory. The save directory's name includes the
+# current date and the Unix epoch time.
+#
+SAVED=saved-$(date +%F-%s)
+rm -rf $SAVED
+
+./terminate
+cp -r shibboleth-idp $SAVED
+./install
+
+./run
+
+tail -f shibboleth-idp/logs/idp-process.log
