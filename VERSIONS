@@ -25,6 +25,6 @@ JETTY_BASE_VERSION=9.4
 #
 # Shibboleth IdP
 #
-SHIB_RELEASE=4.0.0
+SHIB_RELEASE=4.0.1
 
 # End.
