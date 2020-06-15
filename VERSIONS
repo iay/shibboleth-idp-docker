@@ -17,8 +17,8 @@ JAVA_VERSION=amazoncorretto:11
 # so that we can use the simple version number in Docker
 # image tags without overcomplicating things.
 #
-JETTY_VERSION=9.4.28
-JETTY_DATE=v20200408
+JETTY_VERSION=9.4.30
+JETTY_DATE=v20200611
 JETTY_RELEASE=$JETTY_VERSION.$JETTY_DATE
 JETTY_BASE_VERSION=9.4
 
