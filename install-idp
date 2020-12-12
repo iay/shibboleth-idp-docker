@@ -44,7 +44,6 @@ echo \# Properties controlling the installation of the Shibboleth IdP>$I
 #
 $DIST/bin/install.sh \
     -Didp.property.file=idp.install.properties \
-    -Didp.merge.properties=idp.merge.properties \
     -Didp.src.dir=$DIST \
     -Didp.target.dir=$IDP_HOME \
     -Didp.scope=$SCOPE \
