@@ -32,12 +32,6 @@ echo \# Properties controlling the installation of the Shibboleth IdP>$I
 # Uncomment the following to preserve the property files
 # echo idp.no.tidy=true>>$I
 
-S=$DIST/idp.merge.properties
-echo idp.scope=$SCOPE>>$S
-echo idp.entityID=$ENTITYID>>$S
-echo idp.sealer.storePassword=$SEALPASS>>$S
-echo idp.sealer.keyPassword=$SEALPASS>>$S
-
 #
 # Perform the Shibboleth IdP install process.
 #
