@@ -40,7 +40,7 @@ Any JDK from Java 11 onwards will _probably_ work, see the [system requirements]
 ## Fetching the Jetty Distribution
 
 You should execute the `./fetch-jetty` script to pull down a copy of the Jetty distribution
-into `jetty-dist/dist`. The variables `JETTY_VERSION` and `JETTY_DATE in the `VERSIONS` file
+into `jetty-dist/dist`. The variables `JETTY_VERSION` and `JETTY_DATE` in the `VERSIONS` file
 control the version acquired.
 
 Some minimal validation is performed of the downloaded file, but at present it's on a "leap of faith"
