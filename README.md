@@ -1,10 +1,10 @@
 # `shibboleth-idp-docker`
 
-## Shibboleth v3 Identity Provider Deployment using Docker
+## Shibboleth v4 Identity Provider Deployment using Docker
 
 This project is a workspace in which I am experimenting with deploying the
 [Shibboleth](http://shibboleth.net)
-[v3 Identity Provider](https://wiki.shibboleth.net/confluence/display/IDP30/Home)
+[v4 Identity Provider](https://wiki.shibboleth.net/confluence/display/IDP4)
 software using the [Docker](http://www.docker.com) container technology.
 
 Although this is what I'm using to deploy my own, rather minimal,
@@ -32,13 +32,9 @@ of `JAVA_VERSION` in `VERSIONS`:
 JAVA_VERSION=amazoncorretto:11
 ```
 
-Any JDK from Java 7 onwards will _probably_ work, with the proviso that if you
-use something without the
-[Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files](http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html)
-or equivalent the IdP won't able to use some useful encryption algorithms with "long" keys.
-One important example is 256-bit AES, which is eligible for use in XML encryption
-of messages sent to service providers.
-This functionality is built in to all current versions of Java, though.
+Any JDK from Java 11 onwards will _probably_ work, see the [system requirements][] for the IdP.
+
+[system requirements]: https://wiki.shibboleth.net/confluence/display/IDP4/SystemRequirements
 
 
 ## Fetching the Jetty Distribution
@@ -103,13 +99,12 @@ a symbolic link so that it can link to somewhere _inside_ another local reposito
 
 See [`overlay/README.md`](overlay/README.md) for more detail on the overlay system.
 
+
 ## Jetty 9.3 Configuration
 
-If you're using v3 of the Shibboleth Identity Provider, it's possible to use Jetty 9.3. The remarks
-above for Jetty 9.4 apply with obvious changes: the build will copy in the appropriate Jetty base
-and overlay if you set appropriate values in VERSIONS.
+Version 4 of the identity provider requires Jetty 9.4 (if you're using Jetty) so it's no
+longer possible to use Jetty 9.3. Support for that version has therefore been removed.
 
-Jetty 9.3 can't be used with v4 of the identity provider, so I will eventually remove this support.
 
 ## Building the Image
 

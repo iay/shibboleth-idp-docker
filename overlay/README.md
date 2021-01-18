@@ -14,5 +14,6 @@ not part of this repository, so that it can be public).
 
 ## `jetty-base-`xxx Overlays
 
-Either the `overlay/jetty-base-9.4` or `overlay/jetty-base-9.3` overlay is applied to the
-Jetty base directory in the image as appropriate for the version of Jetty in use.
+The appropriate overlay for the version of Jetty in use
+(currently only `overlay/jetty-base-9.4`)
+is applied to the Jetty base directory in the image.
