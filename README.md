@@ -191,6 +191,12 @@ containers and images, which Docker tends to create in abundance during
 development. Use `./cleanup -n` to "dry run" and see what it would remove.
 Docker has got a fair bit better at doing this itself over time, but you may still want
 to run this once in a while to clear out dead wood.
+* `docker-deploy-stack` deploys a container as part of a Docker "swarm mode" stack, defined in `stack.yml`.
+  This is what I currently
+  use "in production". In this deployment, the container runs behind a Traefik reverse proxy which terminates
+  the TLS connection and manages Let's Encrypt certificates; the port 8443 back-channel is bound as a host
+  port and is not proxied, to make it simpler for it to acquire the client certificate.
+* `docker-remove-stack` removes the deployed stack.
 
 ## OpenSSL Tips
 

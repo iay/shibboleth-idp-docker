@@ -1,0 +1,49 @@
+#
+# Stack configuration for the Shibboleth IdP.
+#
+
+version: "3.5"
+
+services:
+
+  idp:
+    image: shibboleth-idp:9.4.36
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          # Constrain to uf01 because that's where we need to
+          # bind on 8443 as a host port for the back-channel.
+          # It's also where the host volumes we need to mount are.
+          - "node.hostname == uf01"
+          # The custom image is only built for a single architecture
+          - "node.platform.arch == x86_64"
+      labels:
+        # Enable the service
+        - "traefik.enable=true"
+        - "traefik.http.services.idp.loadbalancer.server.port=80"
+        # https://idp2.iay.org.uk/
+        - "traefik.http.routers.idp.entrypoints=websecure"
+        - "traefik.http.routers.idp.tls=true"
+        - "traefik.http.routers.idp.tls.certResolver=le"
+        - "traefik.http.routers.idp.rule=Host(`idp2.iay.org.uk`)"
+        - "traefik.http.routers.idp.service=idp"
+    ports:
+      # Publish port 8443 to the host for the back-channel.
+      # The normal HTTPS port (443->80) is routed through traefik.
+      - target: 8443
+        published: 8443
+        mode: host
+    volumes:
+      - type: bind
+        source: ./shibboleth-idp
+        target: /opt/shibboleth-idp
+      - type: bind
+        source: ./logs/jetty
+        target: /opt/jetty-base/logs
+
+networks:
+  default:
+    external: true
+    name: traefik
