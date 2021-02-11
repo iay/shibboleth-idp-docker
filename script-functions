@@ -6,6 +6,11 @@
 #
 
 #
+# Derive directory containing this script.
+#
+DIR=$(dirname "${BASH_SOURCE[0]}")
+
+#
 # Default properties; may be overridden by assignments in
 # an optional CONFIG file.
 #
@@ -27,10 +32,7 @@ CERTBOT_VOL_LOG=/srv/certbot/log
 # The same files will appear at a different location in Docker
 # containers.
 #
-IDP_HOME_LOCAL=$PWD/shibboleth-idp
-
-#
-# CREDENTIAL_DIR
+IDP_HOME_LOCAL=${DIR}/shibboleth-idp
 
 #
 # BROWSER_CERT_PASSWORD
@@ -52,9 +54,58 @@ BROWSER_CERT_PASSWORD=userfacing-changethis
 IPADDR=0.0.0.0
 
 #
-# Override settings if a CONFIG file exists.
+# Default name for the container, if deploying using "docker run".
 #
-if [ -s CONFIG ]; then
-   . CONFIG
+CONTAINER_NAME=shibboleth-idp
+
+#
+# Default names for the stack and service, if deploying using
+# "docker stack deploy".
+#
+STACK_NAME=idp
+SERVICE_NAME=idp
+
+#
+# Override settings if a CONFIG file exists in the same directory
+# as this script.
+#
+if [ -s ${DIR}/CONFIG ]; then
+    . ${DIR}/CONFIG
 fi
 
+#
+# Functions.
+#
+
+echoerr() {
+    echo "$@" 1>&2
+}
+
+#
+# What's the actual name of the running container?
+#
+containerName() {
+    #
+    # Try for the basic container name.
+    #
+    name=$(docker ps --filter "name=^${CONTAINER_NAME}$" \
+                        --format "{{.Names}}")
+    if [ ! -z "${name}" ]; then
+        echo ${name}
+        return
+    fi
+
+    #
+    # Try for the service.
+    #
+    name=$(docker ps --filter "name=^${STACK_NAME}_${SERVICE_NAME}\\.1\\." \
+                  --format "{{.Names}}")
+    echo $name
+}
+
+# Tell Emacs that this is a shell script.
+# Local Variables:
+# mode: sh
+# indent-tabs-mode: nil
+# tab-width: 4
+# End:
