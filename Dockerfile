@@ -63,5 +63,14 @@ CMD ["java",\
 ADD overlay/jetty-base-${JETTY_BASE_VERSION}.tar ${JETTY_BASE}
 
 #
+# Health check for the container.
+#
+# -f == --fail        don't show message on server failures
+# -s == --silent      don't show progress bar or error message
+#
+HEALTHCHECK --interval=1m --timeout=30s \
+    CMD curl -f -s http://127.0.0.1/idp/status || exit 1
+
+#
 # End.
 #
