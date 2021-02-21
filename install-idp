@@ -32,12 +32,6 @@ echo \# Properties controlling the installation of the Shibboleth IdP>$I
 # Uncomment the following to preserve the property files
 # echo idp.no.tidy=true>>$I
 
-S=$DIST/idp.merge.properties
-echo idp.scope=$SCOPE>>$S
-echo idp.entityID=$ENTITYID>>$S
-echo idp.sealer.storePassword=$SEALPASS>>$S
-echo idp.sealer.keyPassword=$SEALPASS>>$S
-
 #
 # Perform the Shibboleth IdP install process.
 #
@@ -50,10 +44,10 @@ echo idp.sealer.keyPassword=$SEALPASS>>$S
 #
 $DIST/bin/install.sh \
     -Didp.property.file=idp.install.properties \
-    -Didp.merge.properties=idp.merge.properties \
     -Didp.src.dir=$DIST \
     -Didp.target.dir=$IDP_HOME \
     -Didp.scope=$SCOPE \
+    -Didp.entityID=$ENTITYID \
     -Didp.host.name=$HOST \
     -Didp.sealer.password=$SEALPASS \
     -Didp.keystore.password=$UFPASS \
