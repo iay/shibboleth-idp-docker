@@ -2,15 +2,21 @@
 
 ## Shibboleth v4 Identity Provider Deployment using Docker
 
-This project is a workspace in which I am experimenting with deploying the
+This project represents my personal deployment of the
 [Shibboleth](http://shibboleth.net)
 [v4 Identity Provider](https://wiki.shibboleth.net/confluence/display/IDP4)
 software using the [Docker](http://www.docker.com) container technology.
 
-Although this is what I'm using to deploy my own, rather minimal,
-identity provider in "production", there's no guarantee that anything
-here actually works. If you find
-something useful you're welcome to take advantage of it.
+If you find something useful here you're welcome to take advantage of it.
+However, there's no guarantee that anything here actually works and I can't
+really offer support. If you're starting out with the Shibboleth IdP and are
+looking for a container deployment, I'd recommend looking at
+[Internet2's TIER "Standalone" Shibboleth-IdP][tier-container] instead.
+Far more people are using that these days, so you will find it easier to get
+assistance.
+
+[tier-container]: https://github.internet2.edu/docker/shib-idp
+
 
 ## Base Image and Java
 
@@ -21,18 +27,10 @@ own production services.
 [Amazon Corretto]: https://aws.amazon.com/corretto/
 
 If you want to replace this with another Java distribution, change the definition
-of `JAVA_VERSION` in `VERSIONS`:
-
-```
-#
-# Java
-#
-# Base image to use for the build.
-#
-JAVA_VERSION=amazoncorretto:11
-```
+of `JAVA_VERSION` in `VERSIONS`.
 
 Any JDK from Java 11 onwards will _probably_ work, see the [system requirements][] for the IdP.
+Note that JDKs from Java 15 onwards no longer bundle a Javascript engine, for example.
 
 [system requirements]: https://wiki.shibboleth.net/confluence/display/IDP4/SystemRequirements
 
@@ -225,7 +223,7 @@ Again, you'll be prompted for any relevant passwords.
 
 ## Copyright and License
 
-The entire package is Copyright (C) 2014&ndash;2020, Ian A. Young.
+The entire package is Copyright (C) 2014&ndash;2021, Ian A. Young.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -238,4 +236,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
