@@ -8,9 +8,12 @@
 . script-functions
 
 #
-# Remove previous logs; directory will be recreated.
+# Create the log directory if not present, and remove previous logs.
+# Done this way to be compatible with Docker Desktop for Mac, which
+# has issues if you delete and recreate a previously used mount point.
 #
-rm -rf logs/test-jetty
+mkdir -p logs/test-jetty
+rm -f logs/test-jetty/*
 
 docker run -i -t --rm \
     --name=idp-test \
