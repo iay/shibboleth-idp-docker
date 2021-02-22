@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Password for any auto-generated user-facing TLS credential
-UFPASS=userfacing-changethis
+# Password for trust fabric credential keystore.
+TFPASS=changeit
 
 # Password for any auto-generated cookie encryption keystore
-SEALPASS=sealer-changethis
+SEALPASS=changeit
 
 # Scope for the IdP
 SCOPE=iay.org.uk
@@ -50,5 +50,5 @@ $DIST/bin/install.sh \
     -Didp.entityID=$ENTITYID \
     -Didp.host.name=$HOST \
     -Didp.sealer.password=$SEALPASS \
-    -Didp.keystore.password=$UFPASS \
+    -Didp.keystore.password=$TFPASS \
     -Didp.noprompt=true

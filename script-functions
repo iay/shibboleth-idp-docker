@@ -40,7 +40,7 @@ IDP_HOME_LOCAL=${DIR}/shibboleth-idp
 # Password for the PKCS12 file containing the front-channel
 # (i.e., browser-facing) X.509 credential.
 #
-BROWSER_CERT_PASSWORD=userfacing-changethis
+BROWSER_CERT_PASSWORD=changeit
 
 #
 # IPADDR

@@ -55,8 +55,8 @@ the installer mechanisms used to do this were not part of the supported API.
 
 In the current iteration, the Jetty configuration has been moved inside the container image.
 As part of the build, the `jetty-base-9.4` directory in this repository is copied to `/opt/jetty-base`
-in the image. This is still _derived_ from the same source, but no longer depends on undocumened
-features of the Shibboleth installer, and comes pre-customised for the container environment.
+in the image. This is still _derived_ from the same source, but no longer depends on undocumented
+features of the Shibboleth installer and comes pre-customised for the container environment.
 Additionally, it lives outside the `/opt/shibboleth-idp` directory, which gives a cleaner
 separation between Jetty and the IdP.
 
@@ -103,6 +103,9 @@ See [`overlay/README.md`](overlay/README.md) for more detail on the overlay syst
 Version 4 of the identity provider requires Jetty 9.4 (if you're using Jetty) so it's no
 longer possible to use Jetty 9.3. Support for that version has therefore been removed.
 
+## Jetty 10.0 Configuration
+
+Coming soon, maybe.
 
 ## Building the Image
 
@@ -136,9 +139,10 @@ the Shibboleth project and included here to avoid taking a complete "leap of fai
 Before attempting the next step, you should edit the `install-idp` script to change the critical
 parameters at the top:
 
-* `UFPASS` and `SEALERPASS` are passwords to use if the user-facing TLS credential or data sealer keystores,
-respectively, need to be generated. It's arguable whether changing the default `X-changethis` values
+* `TSPASS` and `SEALERPASS` are passwords to use if the trust fabric credentials or data sealer keystores,
+respectively, need to be generated. It's arguable whether changing the default `changeit` values
 really adds any security given that the values are just put in the clear in property files anyway.
+I recommend leaving the values at their defaults.
 * `SCOPE` should be your organizational scope.
 * `HOST` is built from `SCOPE` by prepending `idp2.`, which probably won't suit you.
 * `ENTITYID` is built from `HOST`. The default here is the same as the interactive install would suggest.
@@ -166,6 +170,54 @@ can set `IPADDR` to a specific IP address in the `CONFIG` file.
 Setting `IPADDR=127.0.0.1`, for example, might be useful to allow access to the IdP from only the
 Docker host itself during testing. Another use for `IPADDR` would be to single out a specific host
 interface on a multi-homed host.
+
+## Credentials
+
+An IdP deployment uses a number of cryptographic credentials. We've already
+talked about some of these, but for clarity here's a summary of each along
+with details to allow you to get started.
+
+### Browser-facing credential
+
+The _browser-facing_ credential, often referred to as the _user-facing_ or
+_front channel_ credential, is used in the form of a TLS certificate presented
+to the user's browser.
+
+In this deployment, the browser-facing credential is entirely the concern of
+the Jetty configuration, which assumes that a PKCS#12 keystore exists at
+`.../credentials/idp-userfacing.p12`.
+As described earlier, `jetty-base-9.4/start.d/idp.ini` assumes a default
+password of `changeit` for this keystore, and I don't recommend changing this.
+
+The `idp-userfacing.p12` keystore is *not* created by the process described
+above, and the container will fail to start up properly until one is provided.
+
+There are several ways to create this credential:
+
+* If you're just testing, or if you're not planning to use front-channel TLS
+access because your IdP is behind a reverse proxy of some kind, you can
+generate a dummy keystore using the `./gen-selfsigned-cert` script. You may need
+to edit the script to generate a certificate with appropriate subject fields.
+The password you provide at the end of the `./gen-selfsigned-cert` process must
+match the one in `jetty-base-9.4/start.d/idp.ini`.
+
+* If you already have a commercial or in-house-issued credential for the IdP's
+domain name, you can convert that to a `.p12` file using the instructions at
+the end of this document and use that.
+
+* You can use something like [certbot](https://certbot.eff.org) with
+[Let's Encrypt](https://letsencrypt.org) to create and maintain a valid
+short-lived certificate. The scripts `docker-certbot-initial` and
+`docker-certbot-renew` do this, but I no longer use them in my configuration.
+
+    If you want to try these:
+
+    * Edit both files to use your domain name, not mine.
+    * Create the three directories under `/srv` that they expect (see
+      `script-functions` for defaults, or override them in a `CONFIG` file).
+    * Run `./docker-certbot-initial` to create the initial certificate.
+    * Every few days, run `./docker-certbot-renew` to acquire a new certificate
+      and swap it into place if necessary.
 
 ## Executing the Container
 
