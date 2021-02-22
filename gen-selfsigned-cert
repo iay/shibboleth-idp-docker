@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Change subject information
+COMMON_NAME=cn
+COUNTRY=AA
+STATE=state
+LOCALITY=locality
+ORGANISATION=org
+ORGANISATIONAL_UNIT=unit
+EMAIL=email@example.com
+
+openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -keyout userfacing.key -out userfacing.crt -subj "/C=$COUNTRY/ST=$STATE/L=$LOCALITY/O=$ORGANISATION/OU=$ORGANISATIONAL_UNIT/CN=$COMMON_NAME/emailAddress=$EMAIL"
+
+openssl pkcs12 -export -out idp-userfacing.p12 -inkey userfacing.key -in userfacing.crt
+
+mv idp-userfacing.p12 shibboleth-idp/credentials
+
+rm userfacing.key
+rm userfacing.crt
