@@ -43,6 +43,15 @@ IDP_HOME_LOCAL=${DIR}/shibboleth-idp
 BROWSER_CERT_PASSWORD=changeit
 
 #
+# SEALER_PASSWORD
+#
+# Password for the sealer keystore. Must match the idp.sealer.* properties in
+# credentials/secrets.properties, which were originally taken from the
+# definition of SEALPASS in install-idp.
+#
+SEALER_PASSWORD=changeit
+
+#
 # IPADDR
 #
 # IP address to bind to. By default, bind to all Docker host interfaces
