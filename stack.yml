@@ -7,7 +7,7 @@ version: "3.5"
 services:
 
   idp:
-    image: shibboleth-idp:9.4.37
+    image: shibboleth-idp:${JETTY_VERSION}
     deploy:
       mode: replicated
       replicas: 1
