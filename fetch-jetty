@@ -7,8 +7,8 @@
 
 # Jetty release location
 #JETTY_RELDIR=https://build.shibboleth.net/nexus/content/repositories/thirdparty/org/eclipse/jetty/jetty-distribution/$JETTY_RELEASE
-JETTY_RELDIR=https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/$JETTY_RELEASE
-JETTY_PREFIX=jetty-distribution-$JETTY_RELEASE
+JETTY_RELDIR=https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$JETTY_RELEASE
+JETTY_PREFIX=jetty-home-$JETTY_RELEASE
 
 # Fetch everything into a clean download directory
 rm -rf jetty-dist
