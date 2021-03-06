@@ -17,10 +17,10 @@ set -e
 SAVED=saved-$(date +%F-%s)
 rm -rf $SAVED
 
-./terminate
+./docker-remove-stack
 cp -r shibboleth-idp $SAVED
 ./install
 
-./run
+./docker-deploy-stack
 
 tail -f shibboleth-idp/logs/idp-process.log
