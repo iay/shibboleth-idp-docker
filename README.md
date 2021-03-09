@@ -247,6 +247,9 @@ to run this once in a while to clear out dead wood.
   the TLS connection and manages Let's Encrypt certificates; the port 8443 back-channel is bound as a host
   port and is not proxied, to make it simpler for it to acquire the client certificate.
 * `docker-remove-stack` removes the deployed stack.
+* For IdP V4.1 and later, `plugin` and `module` run the `bin/plugin.sh` and `bin/module.sh` commands to manipulate
+  IdP plugins and modules respectively. These commands require that the IdP is not already running, and run up
+  an independent Docker container to perform their operations.
 
 ## OpenSSL Tips
 

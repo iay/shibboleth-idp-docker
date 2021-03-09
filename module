@@ -1,0 +1,36 @@
+#!/bin/bash
+
+#
+# Run the module command inside a stand-alone container.
+#
+# Requires that the main IdP container is *not* running.
+#
+
+#
+# Derive directory containing this script.
+#
+DIR=$(dirname "${BASH_SOURCE[0]}")
+
+#
+# Pick up utility scripts and configuration.
+#
+. ${DIR}/VERSIONS
+. ${DIR}/script-functions
+
+# Home of the IdP *within* the container.
+IDP_HOME=/opt/shibboleth-idp
+
+container=$(containerName)
+if [ ! -z "${container}" ]; then
+	echo "The IdP is already running in ${container}."
+	echo "It must be stopped before you run this command."
+	exit 1
+fi
+
+docker run --rm -it --name="shibboleth-idp-admin" \
+       -v `pwd`/shibboleth-idp:/opt/shibboleth-idp \
+	   --workdir="${IDP_HOME}" \
+       shibboleth-idp:$JETTY_VERSION \
+	   bin/module.sh $*
+
+# End.
