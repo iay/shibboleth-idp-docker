@@ -236,6 +236,8 @@ and run it in the background.
 * `./stop` stops the `shibboleth-idp` container.
 * `./terminate` stops the `shibboleth-idp` container and removes the container. This is useful if
 you want to build and run another container version.
+* `./console` will give you a `bash` prompt inside the running container, with the current directory
+  set to the IdP's home directory (`/opt/shibboleth-idp`).
 * `./cleanup` can be used at any time to remove orphaned
 containers and images, which Docker tends to create in abundance during
 development. Use `./cleanup -n` to "dry run" and see what it would remove.
