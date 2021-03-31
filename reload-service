@@ -17,9 +17,25 @@
 #   ./reload-service -id shibboleth.MetadataResolverService
 #
 
+#
+# Derive directory containing this script.
+#
+DIR=$(dirname "${BASH_SOURCE[0]}")
+
+#
+# Pick up utility scripts and configuration.
+#
+. ${DIR}/script-functions
+
 # Home of the IdP *within* the container.
 IDP_HOME=/opt/shibboleth-idp
 
-docker exec shibboleth-idp $IDP_HOME/bin/reload-service.sh "$@"
+container=$(containerName)
+if [ -z "${container}" ]; then
+	echo "Could not find the container."
+	exit 1
+fi
+
+docker exec ${container} $IDP_HOME/bin/reload-service.sh "$@"
 
 # End.
