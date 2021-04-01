@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#
+# Exit when any command fails
+#
+set -e
+
+#
+# Save the whole of the IdP directory. The save directory's name includes the
+# current date and the Unix epoch time.
+#
+SAVED=saved-$(date +%F-%s)
+rm -rf $SAVED
+
+cp -r shibboleth-idp $SAVED
+
