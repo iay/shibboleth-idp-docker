@@ -41,9 +41,8 @@ You should execute the `./fetch-jetty` script to pull down a copy of the Jetty d
 into `jetty-dist/dist`. The variables `JETTY_VERSION` and `JETTY_DATE` in the `VERSIONS` file
 control the version acquired.
 
-Some minimal validation is performed of the downloaded file, but at present it's on a "leap of faith"
-basis as Jetty's approach to distribution signing has been a little hit and miss. Feel free to submit
-a pull request if you have a better way of handling this.
+Some minimal validation is performed of the downloaded file using a locally compiled collection
+of PGP keys referenced in the Jetty project's `KEYS.txt` file.
 
 ## Jetty 9.4 Configuration
 

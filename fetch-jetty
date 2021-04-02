@@ -5,10 +5,19 @@
 #
 . VERSIONS
 
+
+#
+# Exit when any command fails
+#
+set -e
+
 # Jetty release location
 #JETTY_RELDIR=https://build.shibboleth.net/nexus/content/repositories/thirdparty/org/eclipse/jetty/jetty-distribution/$JETTY_RELEASE
 JETTY_RELDIR=https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$JETTY_RELEASE
 JETTY_PREFIX=jetty-home-$JETTY_RELEASE
+
+# Import Jetty project keys
+gpg --import JETTY_KEYS
 
 # Fetch everything into a clean download directory
 rm -rf jetty-dist
@@ -19,7 +28,6 @@ cd jetty-dist
 wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz
 wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz.sha1
 wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz.asc
-#wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz.asc.sha1
 
 # Verify SHA-1 checksum on Jetty release
 #sha1sum --check $JETTY_PREFIX.tar.gz.sha1
@@ -27,6 +35,9 @@ wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz.asc
 cat $JETTY_PREFIX.tar.gz.sha1
 echo
 sha1sum $JETTY_PREFIX.tar.gz
+
+# Verify GPG signature on Jetty release
+gpg --verify $JETTY_PREFIX.tar.gz.asc
 
 # Unpack everything and rename to standard directories
 tar xf $JETTY_PREFIX.tar.gz
