@@ -6,7 +6,7 @@
   <!-- and no container trust (delegate to application)              -->
   <!-- for backchannel (SOAP) communication to IdP                   -->
   <!-- ============================================================= -->
-  <New id="shibContextFactory" class="net.shibboleth.utilities.jetty9.DelegateToApplicationSslContextFactory">
+  <New id="shibContextFactory" class="net.shibboleth.utilities.jetty94.DelegateToApplicationSslContextFactory">
     <Set name="KeyStorePath"><Property name="idp.backchannel.keyStorePath" default="/opt/shibboleth-idp/credentials/idp-backchannel.p12" /></Set>
     <Set name="KeyStoreType"><Property name="idp.backchannel.keyStoreType" default="PKCS12" /></Set>
     <Set name="KeyStorePassword"><Property name="idp.backchannel.keyStorePassword" default="changeit" /></Set>
