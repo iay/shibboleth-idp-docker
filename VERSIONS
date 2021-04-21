@@ -12,19 +12,65 @@ JAVA_VERSION=amazoncorretto:11
 #
 # Jetty
 #
-# Jetty releases are identified by a fairly normal version number
+# Jetty 9.x releases are identified by a fairly normal version number
 # extended with the date of release. We separate those
 # so that we can use the simple version number in Docker
 # image tags without overcomplicating things.
 #
-JETTY_VERSION=9.4.40
-JETTY_DATE=v20210413
-JETTY_RELEASE=$JETTY_VERSION.$JETTY_DATE
-JETTY_BASE_VERSION=9.4
+# Jetty 10.x releases do not use the additional release date
+# decoration; JETTY_DATE should be set empty in this case.
+#
+JETTY_VERSION=10.0.2
+JETTY_DATE=
+#JETTY_VERSION=9.4.40
+#JETTY_DATE=v20210413
+
+#
+# Split the Jetty version number into its components.
+#
+if [[ $JETTY_VERSION =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+  JETTY_MAJOR=${BASH_REMATCH[1]}
+  JETTY_MINOR=${BASH_REMATCH[2]}
+  JETTY_PATCH=${BASH_REMATCH[3]}
+else
+  JETTY_MAJOR=unknown
+  JETTY_MINOR=unknown
+  JETTY_PATCH=unknown
+  echo "Could not understand Jetty version $JETTY_VERSION"
+fi
+
+#
+# Work out the Jetty release version. For Jetty 10+ this
+# is the same as JETTY_VERSION. For Jetty 9.x, we must add the
+# release date.
+#
+if [[ $JETTY_MAJOR == 10 ]]; then
+  JETTY_RELEASE=$JETTY_VERSION
+else
+  JETTY_RELEASE=$JETTY_VERSION.$JETTY_DATE
+fi
+
+#
+# The jetty-base version is the minor version of the release.
+#
+JETTY_BASE_VERSION=$JETTY_MAJOR.$JETTY_MINOR
+
+#echo "JETTY_VERSION: $JETTY_VERSION"
+#echo "   JETTY_MAJOR: $JETTY_MAJOR"
+#echo "   JETTY_MINOR: $JETTY_MINOR"
+#echo "   JETTY_PATCH: $JETTY_PATCH"
+#echo "JETTY_DATE:    $JETTY_DATE"
+#echo "JETTY_RELEASE: $JETTY_RELEASE"
+#echo "JETTY_BASE_VERSION: $JETTY_BASE_VERSION"
 
 #
 # Shibboleth IdP
 #
 SHIB_RELEASE=4.1.0
 
-# End.
+# Tell Emacs that this is a shell script.
+# Local Variables:
+# mode: sh
+# indent-tabs-mode: nil
+# tab-width: 4
+# End:
