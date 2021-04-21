@@ -3,8 +3,7 @@ Shibboleth IdP Logging
 
 [depend]
 console-capture
-logging-logback
-logback-access
+requestlog
 
 [files]
 logs/
