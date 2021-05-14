@@ -3,9 +3,11 @@ fetched/
 fetched-*/
 jetty-dist/
 logs/*/
+shibboleth-idp/logs/*/
+
 *~
-shibboleth-idp/
-shibboleth-idp-*/
+
+
 saved-*/
 
 #

@@ -7,7 +7,7 @@ TFPASS=changeit
 SEALPASS=changeit
 
 # Scope for the IdP
-SCOPE=iay.org.uk
+SCOPE=trusona.net
 
 # Host name for the container
 HOST=idp2.$SCOPE
