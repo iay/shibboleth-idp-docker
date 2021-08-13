@@ -5,6 +5,12 @@
 #
 # Requires that the main IdP container is *not* running.
 #
+# Changes to the script's directory while running, to set up
+# the local volume mount, but runs the command inside the
+# container in the IdP's working directory. It is therefore
+# easiest to run this script *from* the directory that becomes
+# the IdP's working directory.
+#
 
 #
 # Derive directory containing this script.
@@ -27,10 +33,11 @@ if [ ! -z "${container}" ]; then
 	exit 1
 fi
 
+pushd ${DIR}
 docker run --rm -it --name="shibboleth-idp-admin" \
-       -v `pwd`/shibboleth-idp:/opt/shibboleth-idp \
-	   --workdir="${IDP_HOME}" \
-       shibboleth-idp:$JETTY_VERSION \
-	   bin/module.sh $*
+        -v `pwd`/shibboleth-idp:/opt/shibboleth-idp \
+        --workdir="${IDP_HOME}" \
+        ${IMAGE_NAME} \
+        bin/module.sh $*
 
 # End.

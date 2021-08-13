@@ -2,6 +2,6 @@
 
 . VERSIONS
 
-export JETTY_VERSION
+export IMAGE_NAME
 
 docker stack deploy --compose-file stack.yml idp

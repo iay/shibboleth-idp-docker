@@ -31,7 +31,7 @@ docker pull $JAVA_VERSION
 #
 docker build --build-arg JAVA_VERSION=$JAVA_VERSION \
     --build-arg JETTY_BASE_VERSION=$JETTY_BASE_VERSION \
-    -t shibboleth-idp:$JETTY_VERSION .
+    -t ${IMAGE_NAME} .
 
 #
 # End.

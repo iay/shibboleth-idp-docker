@@ -1,5 +1,5 @@
 #
-# Version numbers for components
+# Version numbers for components and the resulting image.
 #
 
 #
@@ -24,6 +24,31 @@ JETTY_VERSION=10.0.6
 JETTY_DATE=
 #JETTY_VERSION=9.4.40
 #JETTY_DATE=v20210413
+
+#
+# Shibboleth IdP
+#
+SHIB_RELEASE=4.1.4
+
+#
+# Image repository.
+#
+IMAGE_REPO=shibboleth-idp
+
+#
+# Image tag suffix, to allow us to build multiple images with (for example)
+# different versions of Java. Use an empty entry for the main line.
+#
+IMAGE_SUFFIX=
+
+
+#######################################################
+###                                                 ###
+###   D O   N O T   C H A N G E   A N Y T H I N G   ###
+###                                                 ###
+###        B E L O W   T H I S   P O I N T          ###
+###                                                 ###
+#######################################################
 
 #
 # Split the Jetty version number into its components.
@@ -64,9 +89,11 @@ JETTY_BASE_VERSION=$JETTY_MAJOR.$JETTY_MINOR
 #echo "JETTY_BASE_VERSION: $JETTY_BASE_VERSION"
 
 #
-# Shibboleth IdP
+# Image tag and full name.
 #
-SHIB_RELEASE=4.1.4
+IMAGE_TAG=${JETTY_VERSION}${IMAGE_SUFFIX}
+IMAGE_NAME=${IMAGE_REPO}:${IMAGE_TAG}
+
 
 # Tell Emacs that this is a shell script.
 # Local Variables:

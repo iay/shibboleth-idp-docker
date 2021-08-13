@@ -21,4 +21,4 @@ docker run -i -t --rm \
     -v `pwd`/logs/test-jetty:/opt/jetty-base/logs \
     -p $IPADDR:443:443 \
     -p $IPADDR:8443:8443 \
-    shibboleth-idp:$JETTY_VERSION
+    ${IMAGE_NAME}
