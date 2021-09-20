@@ -20,7 +20,7 @@ assistance.
 
 ## Base Image and Java
 
-This Docker build is based on [Amazon Corretto][] 11, an OpenJDK distribution
+This Docker build is based on [Amazon Corretto][] 17, an OpenJDK distribution
 with long term support. This is produced by Amazon and used for many of their
 own production services.
 
