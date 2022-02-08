@@ -121,8 +121,9 @@ part of the Shibboleth configuration, such as passwords. On the other hand, the 
 contain much of the IdP, just a tailored environment for it.
 
 **Note:** If a new version of Jetty is released and you wish to incorporate it, simply change the
-version components in `VERSIONS`, and then execute `./fetch-jetty` and `./build`. Then,
-terminate and re-create your container. You don't need to reinstall Shibboleth for this, as it's
+version components in `VERSIONS`, and then execute `./fetch-jetty` to acquire the new version.
+Then, either use `./build` and terminate and re-create your container manually, or use `./new-jetty` to
+perform those steps. You don't need to reinstall Shibboleth for this, as it's
 not part of the image.
 
 ## Fetching the Shibboleth Distribution

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#
+# This script can be run to simplify the process of integrating a new
+# version of Jetty.
+#
+# It assumes that you have updated the VERSIONS file and successfully
+# executed ./fetch-jetty to download the new version of Jetty.
+#
+# The script builds the new image and brings it into operation, then
+# follows the Shibboleth log. You can ^C out of this when the IdP has
+# started operating.
+#
+
+#
+# Exit when any command fails
+#
+set -e
+
+# Build the new image
+./build
+
+# Bring the new image into operation
+./docker-remove-stack
+sleep 5
+./docker-deploy-stack
+
+tail -f shibboleth-idp/logs/idp-process.log
+
+# End.
