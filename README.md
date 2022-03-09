@@ -97,11 +97,6 @@ a symbolic link so that it can link to somewhere _inside_ another local reposito
 See [`overlay/README.md`](overlay/README.md) for more detail on the overlay system.
 
 
-## Jetty 9.3 Configuration
-
-Version 4 of the identity provider requires Jetty 9.4 (if you're using Jetty) so it's no
-longer possible to use Jetty 9.3. Support for that version has therefore been removed.
-
 ## Jetty 10.0 Configuration
 
 Coming soon, maybe.

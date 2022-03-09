@@ -1,6 +1,15 @@
 #!/bin/bash
 
 #
+# Builds the container image.
+#
+# Always uses the most recent version of the parent image.
+#
+# Arguments to this script are passed to the underlying "docker build"
+# command.
+#
+
+#
 # Assumes that "fetch-jetty" has already been run to acquire the
 # Jetty distribution.
 #
@@ -22,16 +31,12 @@ pushd ${OVERLAY_DIR}/jetty-base-${JETTY_BASE_VERSION}
 popd
 
 #
-# Make sure we have the most recent version of Java available.
-#
-docker pull $JAVA_VERSION
-
-#
 # Build the image.
 #
 docker build --build-arg JAVA_VERSION=$JAVA_VERSION \
     --build-arg JETTY_BASE_VERSION=$JETTY_BASE_VERSION \
-    -t ${IMAGE_NAME} .
+    --pull \
+    $@ -t ${IMAGE_NAME} .
 
 #
 # End.
