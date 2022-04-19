@@ -28,7 +28,7 @@ JETTY_DATE=
 #
 # Shibboleth IdP
 #
-SHIB_RELEASE=4.1.5
+SHIB_RELEASE=4.2.1
 
 #
 # Image repository.
