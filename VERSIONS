@@ -20,7 +20,7 @@ JAVA_VERSION=amazoncorretto:17
 # Jetty 10.x releases do not use the additional release date
 # decoration; JETTY_DATE should be set empty in this case.
 #
-JETTY_VERSION=10.0.9
+JETTY_VERSION=10.0.11
 JETTY_DATE=
 #JETTY_VERSION=9.4.40
 #JETTY_DATE=v20210413
