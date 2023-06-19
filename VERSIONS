@@ -69,7 +69,7 @@ fi
 # is the same as JETTY_VERSION. For Jetty 9.x, we must add the
 # release date.
 #
-if [[ $JETTY_MAJOR == 10 ]]; then
+if [[ $JETTY_MAJOR -ge 10 ]]; then
   JETTY_RELEASE=$JETTY_VERSION
 else
   JETTY_RELEASE=$JETTY_VERSION.$JETTY_DATE
