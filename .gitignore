@@ -8,6 +8,8 @@ shibboleth-idp/
 shibboleth-idp-*/
 saved-*/
 
+*.tmp
+
 #
 # The overlay directory is ignored, except for
 # documentation.
