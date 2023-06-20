@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#
+# In a development environment, logback can get confused
+# by periods of inactivity and not correctly roll really
+# old log file archives.
+#
+# This script removes all standard log files named as
+# being more than 180 days old, which is the IdP's default
+# history period.
+#
+
+FROM=`date --iso-8601 --date="180 days ago"`
+echo "Threshold date: $FROM"
+
+cd shibboleth-idp/logs
+
+# Regular expression to match the date within a name
+RE="([0-9]{4}-[0-9]{2}-[0-9]{2})"
+
+for file in idp-*.log.gz; do
+	# echo "File $file"
+    if [[ $file =~ $RE ]]; then
+		DATE=${BASH_REMATCH[1]}
+		if [[ $DATE < $FROM ]]; then
+			echo "Removing expired log archive $file"
+			rm $file
+		fi
+		
+	fi
+done
