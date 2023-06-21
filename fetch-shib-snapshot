@@ -48,6 +48,11 @@ echo "VSN_VALUE: $VSN_VALUE"
 SRC_URI=$MVN_DIST_DIR/$MVN_A-$VSN_VALUE.tar.gz
 echo "SRC_URI: $SRC_URI"
 
+#
+# Clean temporary file.
+#
+rm -f $META_TMP
+
 # Import Shibboleth project keys
 gpg --import SHIB_KEYS
 
