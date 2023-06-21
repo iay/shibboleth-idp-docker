@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#
+# Put a new configuration into operation.
+#
+# The script removes and re-deploys the stack, then
+# follows the Shibboleth log. You can ^C out of this when the IdP has
+# started operating.
+#
+
+#
+# Exit when any command fails
+#
+set -e
+
+# Bring the new image into operation
+./docker-remove-stack
+sleep 5
+./docker-deploy-stack
+
+tail -f shibboleth-idp/logs/idp-process.log
+
+# End.
