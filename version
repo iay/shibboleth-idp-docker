@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#
+# Run the version command inside the running container.
+#
+
+#
+# Derive directory containing this script.
+#
+DIR=$(dirname "${BASH_SOURCE[0]}")
+
+#
+# Pick up utility scripts and configuration.
+#
+. ${DIR}/VERSIONS
+. ${DIR}/script-functions
+
+# Home of the IdP *within* the container.
+IDP_HOME=/opt/shibboleth-idp
+
+container=$(containerName)
+if [ -z "${container}" ]; then
+	echo "The IdP container is not running."
+	exit 1
+fi
+
+docker exec -it \
+	   --workdir="${IDP_HOME}" \
+	   ${container} bin/version.sh $*
+
+# End.

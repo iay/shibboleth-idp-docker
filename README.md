@@ -1,10 +1,10 @@
 # `shibboleth-idp-docker`
 
-## Shibboleth v4 Identity Provider Deployment using Docker
+## Shibboleth v5 Identity Provider Deployment using Docker
 
 This project represents my personal deployment of the
 [Shibboleth](http://shibboleth.net)
-[v4 Identity Provider](https://wiki.shibboleth.net/confluence/display/IDP4)
+[v5 Identity Provider](https://shibboleth.atlassian.net/wiki/spaces/IDP5/overview)
 software using the [Docker](http://www.docker.com) container technology.
 
 If you find something useful here you're welcome to take advantage of it.
@@ -20,19 +20,21 @@ assistance.
 
 ## Base Image and Java
 
-This Docker build is based on [Amazon Corretto][] 17, an OpenJDK distribution
+This Docker build is normally based on [Amazon Corretto][], an OpenJDK distribution
 with long term support. This is produced by Amazon and used for many of their
 own production services.
 
 [Amazon Corretto]: https://aws.amazon.com/corretto/
 
+Right now, it's temporarily based on an early access version of Java 21, for
+horizon scanning purposes.
+
 If you want to replace this with another Java distribution, change the definition
 of `JAVA_VERSION` in `VERSIONS`.
 
-Any JDK from Java 11 onwards will _probably_ work, see the [system requirements][] for the IdP.
-Note that JDKs from Java 15 onwards no longer bundle a Javascript engine, for example.
+Any JDK from Java 17 onwards will _probably_ work, see the [system requirements][] for the IdP.
 
-[system requirements]: https://wiki.shibboleth.net/confluence/display/IDP4/SystemRequirements
+[system requirements]: https://shibboleth.atlassian.net/wiki/spaces/IDP5/pages/3199511079/SystemRequirements
 
 
 ## Fetching the Jetty Distribution
@@ -247,6 +249,8 @@ to run this once in a while to clear out dead wood.
 * For IdP V4.1 and later, `plugin` and `module` run the `bin/plugin.sh` and `bin/module.sh` commands to manipulate
   IdP plugins and modules respectively. These commands require that the IdP is not already running, and run up
   an independent Docker container to perform their operations.
+* The `version` script runs the `bin/version.sh` command inside the container,
+  and requires that the container _is_ running.
 
 ## OpenSSL Tips
 
@@ -275,7 +279,7 @@ Again, you'll be prompted for any relevant passwords.
 
 ## Copyright and License
 
-The entire package is Copyright (C) 2014&ndash;2021, Ian A. Young.
+The entire package is Copyright (C) 2014&ndash;2023, Ian A. Young.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
