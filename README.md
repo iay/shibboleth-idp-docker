@@ -46,7 +46,7 @@ control the version acquired.
 Some minimal validation is performed of the downloaded file using a locally compiled collection
 of PGP keys referenced in the Jetty project's `KEYS.txt` file.
 
-## Jetty 9.4 Configuration
+## Jetty Configuration
 
 Prior to 2020-02-04, the Jetty configuration used was part of the IdP installation mounted into
 the running container. The actual configuration used was derived from the Jetty base used by the
@@ -55,7 +55,7 @@ that the keystore passwords were not made part of the container image. One disad
 the installer mechanisms used to do this were not part of the supported API.
 
 In the current iteration, the Jetty configuration has been moved inside the container image.
-As part of the build, the `jetty-base-9.4` directory in this repository is copied to `/opt/jetty-base`
+As part of the build, the `jetty-base-11.0` directory in this repository is copied to `/opt/jetty-base`
 in the image. This is still _derived_ from the same source, but no longer depends on undocumented
 features of the Shibboleth installer and comes pre-customised for the container environment.
 Additionally, it lives outside the `/opt/shibboleth-idp` directory, which gives a cleaner
@@ -63,7 +63,7 @@ separation between Jetty and the IdP.
 
 This default configuration uses default keystore passwords as follows.
 
-In `jetty-base-9.4/start.d/idp.ini`:
+In `jetty-base-11.0/start.d/idp.ini`:
 
 ```
 ## Keystore password
@@ -74,7 +74,7 @@ jetty.sslContext.trustStorePassword=changeit
 jetty.sslContext.keyManagerPassword=changeit
 ```
 
-In `jetty-base-9.4/start.d/idp-backchannel.ini`:
+In `jetty-base-11.0/start.d/idp-backchannel.ini`:
 
 ```
 ## Backchannel keystore password
@@ -88,20 +88,15 @@ round to that, though, I'd be delighted to get a pull request in this area.
 
 If you do want to change these or other values, or make any other local customisations to the
 Jetty configuration, you can of course just make a private branch of this repository and change
-the files in `jetty-base-9.4` directly. I have also provided an overlay system to make this a
+the files in `jetty-base-11.0` directly. I have also provided an overlay system to make this a
 bit cleaner.
 
-If you create, for example, `overlay/jetty-base-9.4/start.d/idp.ini`, then that file will overwrite
-the one taken from `jetty-base-9.4`. Anything under `overlay` is ignored by Git so it can be a local
-repository unconnected with this one. I have also made it possible for `overlay/jetty-base-9.4` to be
+If you create, for example, `overlay/jetty-base-11.0/start.d/idp.ini`, then that file will overwrite
+the one taken from `jetty-base-11.0`. Anything under `overlay` is ignored by Git so it can be a local
+repository unconnected with this one. I have also made it possible for `overlay/jetty-base-11.0` to be
 a symbolic link so that it can link to somewhere _inside_ another local repository.
 
 See [`overlay/README.md`](overlay/README.md) for more detail on the overlay system.
-
-
-## Jetty 10.0 Configuration
-
-Coming soon, maybe.
 
 ## Building the Image
 
@@ -183,7 +178,7 @@ to the user's browser.
 In this deployment, the browser-facing credential is entirely the concern of
 the Jetty configuration, which assumes that a PKCS#12 keystore exists at
 `.../credentials/idp-userfacing.p12`.
-As described earlier, `jetty-base-9.4/start.d/idp.ini` assumes a default
+As described earlier, `jetty-base-11.0/start.d/idp.ini` assumes a default
 password of `changeit` for this keystore, and I don't recommend changing this.
 
 The `idp-userfacing.p12` keystore is *not* created by the process described
