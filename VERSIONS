@@ -7,7 +7,7 @@
 #
 # Base image to use for the build.
 #
-JAVA_VERSION=openjdk:21-rc-jdk-bookworm
+JAVA_VERSION=amazoncorretto:21
 
 #
 # Jetty
