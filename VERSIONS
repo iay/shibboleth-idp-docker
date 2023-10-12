@@ -12,18 +12,7 @@ JAVA_VERSION=amazoncorretto:21
 #
 # Jetty
 #
-# Jetty 9.x releases are identified by a fairly normal version number
-# extended with the date of release. We separate those
-# so that we can use the simple version number in Docker
-# image tags without overcomplicating things.
-#
-# Jetty 10.x releases do not use the additional release date
-# decoration; JETTY_DATE should be set empty in this case.
-#
 JETTY_VERSION=11.0.17
-JETTY_DATE=
-#JETTY_VERSION=9.4.40
-#JETTY_DATE=v20210413
 
 #
 # Shibboleth IdP
@@ -66,14 +55,9 @@ fi
 
 #
 # Work out the Jetty release version. For Jetty 10+ this
-# is the same as JETTY_VERSION. For Jetty 9.x, we must add the
-# release date.
+# is the same as JETTY_VERSION.
 #
-if [[ $JETTY_MAJOR -ge 10 ]]; then
-  JETTY_RELEASE=$JETTY_VERSION
-else
-  JETTY_RELEASE=$JETTY_VERSION.$JETTY_DATE
-fi
+JETTY_RELEASE=$JETTY_VERSION
 
 #
 # The jetty-base version is the minor version of the release.
@@ -84,7 +68,6 @@ JETTY_BASE_VERSION=$JETTY_MAJOR.$JETTY_MINOR
 #echo "   JETTY_MAJOR: $JETTY_MAJOR"
 #echo "   JETTY_MINOR: $JETTY_MINOR"
 #echo "   JETTY_PATCH: $JETTY_PATCH"
-#echo "JETTY_DATE:    $JETTY_DATE"
 #echo "JETTY_RELEASE: $JETTY_RELEASE"
 #echo "JETTY_BASE_VERSION: $JETTY_BASE_VERSION"
 
