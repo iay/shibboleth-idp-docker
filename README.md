@@ -155,7 +155,7 @@ container. Each relevant script defers configuration to `script-functions`, whic
 invokes `CONFIG` (if present) to override those defaults. An example `CONFIG` file is provided as
 `CONFIG.example`.
 
-By default, the container's port 443 and 8443 are bound to the Docker host's same-numbered ports on all
+By default, the container's port 443 is bound to the Docker host's same-numbered port on all
 available interfaces. This is probably the right choice for most people. If you need to override this, you
 can set `IPADDR` to a specific IP address in the `CONFIG` file.
 
@@ -238,8 +238,7 @@ to run this once in a while to clear out dead wood.
 * `docker-deploy-stack` deploys a container as part of a Docker "swarm mode" stack, defined in `stack.yml`.
   This is what I currently
   use "in production". In this deployment, the container runs behind a Traefik reverse proxy which terminates
-  the TLS connection and manages Let's Encrypt certificates; the port 8443 back-channel is bound as a host
-  port and is not proxied, to make it simpler for it to acquire the client certificate.
+  the TLS connection and manages Let's Encrypt certificates.
 * `docker-remove-stack` removes the deployed stack.
 * For IdP V4.1 and later, `plugin` and `module` run the `bin/plugin.sh` and `bin/module.sh` commands to manipulate
   IdP plugins and modules respectively. These commands require that the IdP is not already running, and run up

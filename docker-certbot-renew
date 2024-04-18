@@ -5,7 +5,7 @@
 #
 # Acquire the certificate.
 #
-# The live IdP runs on ports 433 and 8443. Port 80 is normally unbound
+# The live IdP runs on port 443. Port 80 is normally unbound
 # so can be used for the ACME http-01 protocol.
 #
 docker run --rm --label=certbot-idp-renew \

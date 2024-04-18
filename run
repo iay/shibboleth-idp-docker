@@ -12,5 +12,4 @@ docker run -d --restart=unless-stopped \
     -v `pwd`/shibboleth-idp:/opt/shibboleth-idp \
     -v `pwd`/logs/jetty:/opt/jetty-base/logs \
     -p $IPADDR:443:443 \
-    -p $IPADDR:8443:8443 \
     ${IMAGE_NAME}
