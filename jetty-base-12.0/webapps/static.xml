@@ -8,7 +8,7 @@
   <Set name="handler">
     <New class="org.eclipse.jetty.server.handler.ResourceHandler">
       <Set name="baseResourceAsString">
-        <SystemProperty name="jetty.base"/>/<Property name="jetty.static.data.path" default="static"/>
+        <SystemProperty name="idp.home"/>/<Property name="jetty.static.data.path" default="static"/>
       </Set>
       <Set name="dirAllowed">false</Set>
     </New>
