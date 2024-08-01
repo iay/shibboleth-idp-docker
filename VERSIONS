@@ -17,7 +17,7 @@ JETTY_VERSION=12.0.12
 #
 # Shibboleth IdP
 #
-SHIB_RELEASE=5.1.2
+SHIB_RELEASE=5.1.3
 
 #
 # Image repository.
