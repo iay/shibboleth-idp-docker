@@ -9,8 +9,11 @@
 
 #
 # The base Java image to use is determined by a build argument.
+# This defaults to the lowest version of Corretto supported by
+# current IdP versions, but is normally overridden by the VERSIONS
+# file via the build script.
 #
-ARG JAVA_VERSION
+ARG JAVA_VERSION=amazoncorretto:17
 FROM ${JAVA_VERSION}
 
 MAINTAINER Ian Young <ian@iay.org.uk>
