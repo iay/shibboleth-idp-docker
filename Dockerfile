@@ -16,7 +16,7 @@
 ARG JAVA_VERSION=amazoncorretto:17
 FROM ${JAVA_VERSION}
 
-MAINTAINER Ian Young <ian@iay.org.uk>
+LABEL org.opencontainers.image.authors="Ian Young <ian@iay.org.uk>"
 
 #
 # Jetty itself lives in JETTY_HOME.
