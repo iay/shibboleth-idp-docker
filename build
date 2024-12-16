@@ -35,7 +35,7 @@ popd
 #
 docker build --build-arg JAVA_VERSION=$JAVA_VERSION \
     --build-arg JETTY_BASE_VERSION=$JETTY_BASE_VERSION \
-    --pull \
+    --pull --no-cache \
     $@ -t ${IMAGE_NAME} .
 
 #
