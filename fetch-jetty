@@ -5,11 +5,15 @@
 #
 . VERSIONS
 
-
 #
 # Exit when any command fails
 #
 set -e
+
+#
+# Destination directory.
+#
+DEST=jetty-dist-${JETTY_VERSION}
 
 # Jetty release location
 #JETTY_RELDIR=https://build.shibboleth.net/nexus/content/repositories/thirdparty/org/eclipse/jetty/jetty-distribution/$JETTY_RELEASE
@@ -20,9 +24,9 @@ JETTY_PREFIX=jetty-home-$JETTY_RELEASE
 gpg --import JETTY_KEYS
 
 # Fetch everything into a clean download directory
-rm -rf jetty-dist
-mkdir jetty-dist
-cd jetty-dist
+rm -rf ${DEST}
+mkdir ${DEST}
+cd ${DEST}
 
 # Fetch the Jetty release
 wget $JETTY_RELDIR/$JETTY_PREFIX.tar.gz

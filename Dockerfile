@@ -46,7 +46,8 @@ ADD jetty-base-${JETTY_BASE_VERSION} ${JETTY_BASE}
 #
 # Add the Jetty distribution.
 #
-ADD jetty-dist/dist          ${JETTY_HOME}
+ARG JETTY_VERSION
+ADD jetty-dist-${JETTY_VERSION}/dist ${JETTY_HOME}
 
 EXPOSE 80 443 8443
 
