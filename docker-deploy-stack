@@ -1,7 +1,9 @@
 #!/bin/bash
 
+set -e
+
 . VERSIONS
 
 export IMAGE_NAME
 
-docker stack deploy --compose-file stack.yml idp
+docker stack deploy --compose-file stack.yml --detach=false idp
