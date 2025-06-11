@@ -14,7 +14,11 @@
 # file via the build script.
 #
 ARG JAVA_VERSION=amazoncorretto:17
-FROM ${JAVA_VERSION}
+
+#
+# This image is based on the Alpine Linux variant of the Java container.
+#
+FROM ${JAVA_VERSION}-alpine
 
 LABEL org.opencontainers.image.authors="Ian Young <ian@iay.org.uk>"
 
@@ -36,6 +40,12 @@ ENV JETTY_LOGS=${JETTY_BASE}/logs
 VOLUME ["${JETTY_LOGS}"]
 
 ENV IDP_HOME=/opt/shibboleth-idp
+
+#
+# Alpine Linux containers are a lot smaller, but don't have any additional
+# components. We need to add "curl" for the health check.
+#
+RUN apk add --no-cache curl
 
 #
 # Add the Jetty base.

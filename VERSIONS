@@ -7,6 +7,10 @@
 #
 # Base image to use for the build.
 #
+# The Dockerfile assumes that this will be some version of the
+# Amazon Corretto image, as "-alpine" is appended to the
+# version provided here.
+#
 JAVA_VERSION=amazoncorretto:21
 
 #

@@ -26,11 +26,13 @@ own production services.
 
 [Amazon Corretto]: https://aws.amazon.com/corretto/
 
-Right now, it's temporarily based on an early access version of Java 21, for
-horizon scanning purposes.
+Right now, i'm using the Alpine variant of Java 21, the latest LTS version.
 
 If you want to replace this with another Java distribution, change the definition
-of `JAVA_VERSION` in `VERSIONS`.
+of `JAVA_VERSION` in `VERSIONS`. Note that the `Dockerfile` assumes that an Alpine
+Linux variant of the base container is available and can be referenced by adding
+`-alpine` to the base image's version. If that's not the case, you will need to
+tweak the `Dockerfile` accordingly.
 
 Any JDK from Java 17 onwards will _probably_ work, see the [system requirements][] for the IdP.
 
