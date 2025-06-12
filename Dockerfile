@@ -43,9 +43,10 @@ ENV IDP_HOME=/opt/shibboleth-idp
 
 #
 # Alpine Linux containers are a lot smaller, but don't have any additional
-# components. We need to add "curl" for the health check.
+# components. We need to add "curl" for the health check and "bash" for
+# key roll-over.
 #
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl bash
 
 #
 # Add the Jetty base.
