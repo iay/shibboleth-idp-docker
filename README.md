@@ -26,7 +26,8 @@ own production services.
 
 [Amazon Corretto]: https://aws.amazon.com/corretto/
 
-Right now, i'm using the Alpine variant of Java 21, the latest LTS version.
+Right now, i'm using the Alpine variant of Java 21, the most recent version
+with long-term support.
 
 If you want to replace this with another Java distribution, change the definition
 of `JAVA_VERSION` in `VERSIONS`. Note that the `Dockerfile` assumes that an Alpine
@@ -57,7 +58,7 @@ that the keystore passwords were not made part of the container image. One disad
 the installer mechanisms used to do this were not part of the supported API.
 
 In the current iteration, the Jetty configuration has been moved inside the container image.
-As part of the build, the `jetty-base-11.0` directory in this repository is copied to `/opt/jetty-base`
+As part of the build, the appropriate `jetty-base-xxx` directory in this repository is copied to `/opt/jetty-base`
 in the image. This is still _derived_ from the same source, but no longer depends on undocumented
 features of the Shibboleth installer and comes pre-customised for the container environment.
 Additionally, it lives outside the `/opt/shibboleth-idp` directory, which gives a cleaner
@@ -65,7 +66,7 @@ separation between Jetty and the IdP.
 
 This default configuration uses default keystore passwords as follows.
 
-In `jetty-base-11.0/start.d/idp.ini`:
+In `jetty-base-xxx/start.d/idp.ini`:
 
 ```
 ## Keystore password
@@ -76,7 +77,7 @@ jetty.sslContext.trustStorePassword=changeit
 jetty.sslContext.keyManagerPassword=changeit
 ```
 
-In `jetty-base-11.0/start.d/idp-backchannel.ini`:
+In `jetty-base-xxx/start.d/idp-backchannel.ini`:
 
 ```
 ## Backchannel keystore password
@@ -90,12 +91,12 @@ round to that, though, I'd be delighted to get a pull request in this area.
 
 If you do want to change these or other values, or make any other local customisations to the
 Jetty configuration, you can of course just make a private branch of this repository and change
-the files in `jetty-base-11.0` directly. I have also provided an overlay system to make this a
+the files in `jetty-base-xxx` directly. I have also provided an overlay system to make this a
 bit cleaner.
 
-If you create, for example, `overlay/jetty-base-11.0/start.d/idp.ini`, then that file will overwrite
-the one taken from `jetty-base-11.0`. Anything under `overlay` is ignored by Git so it can be a local
-repository unconnected with this one. I have also made it possible for `overlay/jetty-base-11.0` to be
+If you create, for example, `overlay/jetty-base-12.1/start.d/idp.ini`, then that file will overwrite
+the one taken from `jetty-base-12.1`. Anything under `overlay` is ignored by Git so it can be a local
+repository unconnected with this one. I have also made it possible for `overlay/jetty-base-12.1` to be
 a symbolic link so that it can link to somewhere _inside_ another local repository.
 
 See [`overlay/README.md`](overlay/README.md) for more detail on the overlay system.
@@ -180,7 +181,7 @@ to the user's browser.
 In this deployment, the browser-facing credential is entirely the concern of
 the Jetty configuration, which assumes that a PKCS#12 keystore exists at
 `.../credentials/idp-userfacing.p12`.
-As described earlier, `jetty-base-11.0/start.d/idp.ini` assumes a default
+As described earlier, `jetty-base-xxx/start.d/idp.ini` assumes a default
 password of `changeit` for this keystore, and I don't recommend changing this.
 
 The `idp-userfacing.p12` keystore is *not* created by the process described
@@ -193,7 +194,7 @@ access because your IdP is behind a reverse proxy of some kind, you can
 generate a dummy keystore using the `./gen-selfsigned-cert` script. You may need
 to edit the script to generate a certificate with appropriate subject fields.
 The password you provide at the end of the `./gen-selfsigned-cert` process must
-match the one in `jetty-base-9.4/start.d/idp.ini`.
+match the one in `jetty-base-xxx/start.d/idp.ini`.
 
 * If you already have a commercial or in-house-issued credential for the IdP's
 domain name, you can convert that to a `.p12` file using the instructions at
@@ -275,7 +276,7 @@ Again, you'll be prompted for any relevant passwords.
 
 ## Copyright and License
 
-The entire package is Copyright (C) 2014&ndash;2023, Ian A. Young.
+The entire package is Copyright (C) 2014&ndash;2025, Ian A. Young.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
