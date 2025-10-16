@@ -11,7 +11,7 @@
 # Amazon Corretto image, as "-alpine" is appended to the
 # version provided here.
 #
-JAVA_VERSION=amazoncorretto:21
+JAVA_VERSION=amazoncorretto:25
 
 #
 # Jetty
