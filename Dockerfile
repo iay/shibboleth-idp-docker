@@ -83,8 +83,11 @@ ADD overlay/jetty-base-${JETTY_BASE_VERSION}.tar ${JETTY_BASE}
 # -f == --fail        don't show message on server failures
 # -s == --silent      don't show progress bar or error message
 #
+# --max-time 10       curl should time out before Docker does;
+#                     helps to reduce zombie process creation
+#
 HEALTHCHECK --interval=1m --timeout=30s \
-    CMD curl -f -s http://127.0.0.1/idp/status || exit 1
+    CMD curl -f -s --max-time 10 http://127.0.0.1/idp/status || exit 1
 
 #
 # End.
