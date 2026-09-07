@@ -1,15 +1,20 @@
-Jetty project key fingerprints extracted 2021-04-02 from
-https://github.com/eclipse/jetty.project/blob/jetty-10.0.x/KEYS.txt
+Jetty project key fingerprints extracted 2026-09-07 from
+https://github.com/eclipse/jetty.project/blob/jetty-12.1.x/KEYS.txt
 
 # GPG Release Key Fingerprints
-Jan Bartel      <janb@mortbay.com>          AED5 EE6C 45D0 FE8D 5D1B  164F 27DE D4BF 6216 DB8F
-Jesse McConnell <jesse.mcconnell@gmail.com> 2A68 4B57 436A 81FA 8706  B53C 61C3 351A 438A 3B7D
-Joakim Erdfelt  <joakim.erdfelt@gmail.com>  5989 BAF7 6217 B843 D66B  E55B 2D0E 1FB8 FE4B 68B4
-Joakim Erdfelt  <joakime@apache.org>        B59B 67FD 7904 9843 67F9  3180 0818 D9D6 8FB6 7BAC
-Joakim Erdfelt  <joakim@erdfelt.com>        BFBB 21C2 46D7 7768 3628  7A48 A04E 0C74 ABB3 5FEA
-Simone Bordet   <simone.bordet@gmail.com>   8B09 6546 B1A8 F026 56B1  5D3B 1677 D141 BCF3 584D
-Olivier Lamy    <olamy@apache.org>          F254 B356 17DC 255D 9344  BCFA 873A 8E86 B437 2146
-Ludovic Orban   <lorban@bitronix.be>        E224 88CC 94F6 3E3F C928  536C 4241 C082 70D9 99C3
+Jan Bartel      <janb@mortbay.com>            AED5 EE6C 45D0 FE8D 5D1B  164F 27DE D4BF 6216 DB8F
+Jesse McConnell <jesse.mcconnell@gmail.com>   2A68 4B57 436A 81FA 8706  B53C 61C3 351A 438A 3B7D
+Joakim Erdfelt  <joakim.erdfelt@gmail.com>    5989 BAF7 6217 B843 D66B  E55B 2D0E 1FB8 FE4B 68B4
+Joakim Erdfelt  <joakime@apache.org>          B59B 67FD 7904 9843 67F9  3180 0818 D9D6 8FB6 7BAC
+Joakim Erdfelt  <joakim@erdfelt.com>          BFBB 21C2 46D7 7768 3628  7A48 A04E 0C74 ABB3 5FEA
+Simone Bordet   <simone.bordet@gmail.com>     8B09 6546 B1A8 F026 56B1  5D3B 1677 D141 BCF3 584D
+Olivier Lamy    <olamy@apache.org>            F254 B356 17DC 255D 9344  BCFA 873A 8E86 B437 2146
+Olivier Lamy    <olamy@apache.org>            716E E302 674C DBB2 E660  E1B4 4DB5 EA09 F2E3 C800
+Ludovic Orban   <lorban@bitronix.be>          CD38 A1DA DA34 13BE 96DF  547F 3D14 6A4A 1C58 367E
+Lachlan Roberts <lachlan.p.roberts@gmail.com> 75DE 085F 73C1 2232 6066  3C24 5663 FB7A 8FF7 E348
+
+Individual key blocks are pulled from key servers (e.g., https://pgpkeys.eu) as necessary
+according to the fingerprints above.
 
 Individual key blocks follow:
 
@@ -599,6 +604,31 @@ jYyDiEkEGBECAAkFAkdddc8CGwwACgkQhzqOhrQ3IUZkrACcDtB3CttHYgGrF31KCocX/gwC
 iYEAn18D875QwNruE4Qkt/W0Rhy/QRIZ
 =eBqU
 -----END PGP PUBLIC KEY BLOCK-----
+
+Olivier Lamy    <olamy@apache.org>            716E E302 674C DBB2 E660  E1B4 4DB5 EA09 F2E3 C800
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mDMEajtiuxYJKwYBBAHaRw8BAQdAu9n6HjScTA+FNmuLwyoJ7/4/DHju7Mf1nJgV
+usnAHE20JE9saXZpZXIgTGFteSA8b2xpdmVyLmxhbXlAZ21haWwuY29tPoiQBBMW
+CgA4FiEEcW7jAmdM27LmYOG0TbXqCfLjyAAFAmo7Y0UCGwMFCwkIBwIGFQoJCAsC
+BBYCAwECHgECF4AACgkQTbXqCfLjyAAH5AEAyS3tSxgjcnPLmfAianTdjx4MyYkm
+UCrBbcbw1ShfO/gBAOfxS2o2ZMODVsZf6PEVWR9i6zU6RVjQEmtvF8kSryEIiF0E
+EBECAB0WIQTyVLNWF9wlXZNEvPqHOo6GtDchRgUCajtj9gAKCRCHOo6GtDchRuSl
+AJsFeMYh3sZdy12x9rUQtqeX0FHVfgCeM0etFDN+u14lkOgJpcGHQKfuzJO0H09s
+aXZpZXIgTGFteSA8b2xhbXlAYXBhY2hlLm9yZz6IkAQTFgoAOBYhBHFu4wJnTNuy
+5mDhtE216gny48gABQJqO2K7AhsDBQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJ
+EE216gny48gAvucA/j0RZ0GC3wP/S60buCHFaojT+EJSYBxkJdUdkhKprdMdAP9N
+Q1uTfYz4PGj94v4Rhn/YmT17R8n+Z1CZ14ytgAWrBohdBBARAgAdFiEE8lSzVhfc
+JV2TRLz6hzqOhrQ3IUYFAmo7Y/YACgkQhzqOhrQ3IUa9QACfbF2Rs4jVtWYIZTw6
+hY4kpSAu6E4AnRlK9J1BL27JA9GaHFv710k5+Dq2uDgEajtiuxIKKwYBBAGXVQEF
+AQEHQHh7ITKREsuRFguenNFhc87oPujGQIrG1ILU9hUZUI8tAwEIB4h3BBgWCgAg
+FiEEcW7jAmdM27LmYOG0TbXqCfLjyAAFAmo7YrsCGwwACgkQTbXqCfLjyAADgAD2
+OWQ8kTvFYyqwvNVeO8jiq/8StNiR9oS/hJnrLl0yUgEAxBdeyn7bUSnHXcmI5WS4
+RNxfzR8NukdZXXxlr0w3uAE=
+=vHUq
+-----END PGP PUBLIC KEY BLOCK-----
+
 
 Ludovic Orban   <lorban@bitronix.be>        E224 88CC 94F6 3E3F C928  536C 4241 C082 70D9 99C3
 
